@@ -13,7 +13,7 @@ public class AuditoriaDAOImpl {
 	public AuditoriaDAOImpl(){
 		this.st = ("SELECT COUNT(a) ");
 		this.st = this.st +   ("FROM Auditoria a ");
-		this.st = this.st +   ("WHERE (idEnClaseObjetivo = :param1) ");
+		this.st = this.st +   ("WHERE ((idEnClaseObjetivo = :param1) or (:param1 = -1))");
 		this.st = this.st +   ("AND (operacion = :param2) ");
 		this.st = this.st +   ("AND (claseObjetivo = :param3) ");
 	}
@@ -41,6 +41,10 @@ public class AuditoriaDAOImpl {
 		return ((Long) result);
 	}
 	
+	public long altasGenerales(String entidad){		
+	  return altasEnEntidad(-1, entidad);	
+	}
+	
 	public long modificacionesEnEntidad(long id, String entidad){
 		EntityManager em = Conexion.getEntityManager();			
 		Query query = em.createQuery(this.st);
@@ -51,6 +55,10 @@ public class AuditoriaDAOImpl {
 		return ((Long) result);
 	}
 	
+	public long modificacionesGenerales(String entidad){
+		return modificacionesEnEntidad(-1, entidad);
+	}
+	
 	public long bajasEnEntidad(long id, String entidad){
 		EntityManager em = Conexion.getEntityManager();			
 		Query query = em.createQuery(this.st);
@@ -59,6 +67,10 @@ public class AuditoriaDAOImpl {
 		query.setParameter("param3", entidad);
 		Object result = query.getSingleResult();
 		return ((Long) result);
+	}
+	
+	public long bajasGenerales(String entidad){
+		return bajasEnEntidad(-1, entidad);
 	}
 
 }

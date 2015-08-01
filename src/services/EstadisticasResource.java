@@ -54,6 +54,35 @@ public class EstadisticasResource {
 	  }
 	
 	@GET
+	@Path("/generales")
+	@Produces(MediaType.APPLICATION_JSON )
+	@Consumes(MediaType.TEXT_PLAIN)
+	public List<EstadisticasPares> estGeneralesDeUsuario() {
+		
+		EstadisticasPares altas;
+		EstadisticasPares bajas;
+		EstadisticasPares modificaciones;
+		List<EstadisticasPares> lista = new ArrayList<EstadisticasPares>();
+				
+		altas = new EstadisticasPares();
+		altas.setOp("altas");
+		altas.setCantidad(this.estService.altasDeUsuarios());
+		lista.add(altas);
+		
+		bajas = new EstadisticasPares();
+		bajas.setOp("bajas");
+		bajas.setCantidad(this.estService.bajasDeUsuarios());
+		lista.add(bajas);
+		
+		modificaciones = new EstadisticasPares();
+		modificaciones.setOp("modificaciones");
+		modificaciones.setCantidad(this.estService.modificacionesDeUsuarios());
+		lista.add(modificaciones);
+		
+	    return lista;
+	  }
+	
+	@GET
 	@Path("/bici")
 	@Produces(MediaType.TEXT_HTML)
 	public String bicy() {

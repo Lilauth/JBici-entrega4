@@ -64,8 +64,7 @@ public class UsuarioBean {
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}		
-	
-	
+		
 	public Usuario getUsuario2() {
 		return usuario2;
 	}

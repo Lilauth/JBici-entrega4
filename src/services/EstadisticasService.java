@@ -24,4 +24,16 @@ public class EstadisticasService {
 		//retorna las altas de usuarios
 		return this.auditDAO.bajasEnEntidad(id, "class model.Usuario");
 	}
+	
+	public long altasDeUsuarios(){
+		return this.auditDAO.altasGenerales("class model.Usuario");
+	}
+	
+	public long modificacionesDeUsuarios(){
+		return this.auditDAO.modificacionesGenerales("class model.Usuario");
+	}
+	
+	public long bajasDeUsuarios(){
+		return this.auditDAO.bajasGenerales("class model.Usuario");
+	}
 }
