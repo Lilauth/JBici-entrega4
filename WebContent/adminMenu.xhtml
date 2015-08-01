@@ -1,0 +1,34 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+	<b:navBar brand="JBici" brandHref="bienvenido.xhtml" inverse="true" fixed="top">
+            <b:navbarLinks>
+                <b:navLink value="Usuarios" outcome="usuarios.xhtml"></b:navLink>
+                <b:navLink value="#{ loginBean.username }" outcome="usuario.xhtml"></b:navLink>
+                <b:dropMenu value="Dropdown">
+                    <b:navLink value="Action" href="#"></b:navLink>
+                    <b:navLink value="Another action" href="#"></b:navLink>
+                    <b:navLink value="Something else here" href="#"></b:navLink>
+                    <b:navLink></b:navLink>
+                    <b:navLink header="Nav header"></b:navLink>
+                    <b:navLink value="Separated link" href="#"></b:navLink>
+                    <b:navLink value="One more separated link" href="#" tooltipPosition="right"></b:navLink>
+                </b:dropMenu>
+            </b:navbarLinks>
+    </b:navBar>
+               
+    <h:link value="Inicio" outcome="bienvenido.xhtml">														
+	</h:link>&#xA0;	
+    <h:link value="Usuarios" outcome="usuarios.xhtml">														
+	</h:link>&#xA0;	
+	<h:link value="#{ loginBean.username }" outcome="usuario.xhtml">
+      <f:param name="id" value="#{ loginBean.idUsuario }" />
+      <f:param name="oper" value="M" />															
+	</h:link>&#xA0;	
+	<h:form>	
+	<h:commandLink value="Cerrar Sesion" action="#{ loginBean.logout }"/>	
+	</h:form>					
+</ui:composition>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+<ui:composition template="templates/defaultLayout.xhtml">
+
+		<ui:define name="header" >
+		    <h:panelGroup rendered="#{ loginBean.esAdmin }">
+    			<ui:include src="adminMenu.xhtml"/>
+ 			</h:panelGroup>	   
+ 			<h:panelGroup rendered="#{ not loginBean.esAdmin }">
+    			<ui:include src="userMenu.xhtml"/>
+ 			</h:panelGroup>	    		     		    
+		    <h3>
+		       <h:outputText value="Registro" rendered="#{ usuarioBean.esAlta }" />
+		       <h:outputText value="Modifica Usuario" rendered="#{ not usuarioBean.esAlta}"/>		    
+			</h3>
+			
+		</ui:define>
+		
+		<ui:define name="content">
+			<h:form id="newUserForm">
+				<h:message for="newUserForm" /> <br />
+				nombre:<h:inputText value="#{ usuarioBean.usuario2.nombre }"></h:inputText>
+				apellido:<h:inputText value="#{ usuarioBean.usuario2.apellido }">				          
+				          </h:inputText>				
+				DNI:<h:inputText value="#{ usuarioBean.usuario2.dni }">				          
+				          </h:inputText>  
+				domicilio:<h:inputText value="#{ usuarioBean.usuario2.domicilio }">				          
+				          </h:inputText> 
+				sexo:<h:inputText value="#{ usuarioBean.usuario2.sexo }">				          
+				          </h:inputText>
+				e-mail:<h:inputText value="#{ usuarioBean.usuario2.email }">				          
+				          </h:inputText>
+				<h:outputText value="password:" rendered="#{ ((usuarioBean.oper ne 'B') or (usuarioBean.esAlta)) }" />
+				<h:inputSecret value="#{ usuarioBean.usuario2.password }" rendered="#{ ((usuarioBean.oper ne 'B') or (usuarioBean.esAlta)) }" />				          				        
+				<h:outputText value="perfil:" rendered="#{ loginBean.esAdmin}"/>		
+				<h:selectOneMenu label="perfil" value="#{ usuarioBean.perfil }" rendered="#{ loginBean.esAdmin }">
+						 <f:selectItems value="#{ usuarioBean.perfilesDisponibles }" />						
+				</h:selectOneMenu>	                         			          
+				<h:commandButton value="Aceptar" action="#{ usuarioBean.registrar }"></h:commandButton>				
+				<a href="index.xhtml">Inicio</a>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

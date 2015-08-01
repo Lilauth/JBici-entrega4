@@ -1,0 +1,15 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">    
+    <h:link value="Inicio" outcome="bienvenido.xhtml">														
+	</h:link>&#xA0;	    
+	<h:link value="#{ loginBean.username }" outcome="usuario.xhtml">
+      <f:param name="id" value="#{ loginBean.idUsuario }" />
+      <f:param name="oper" value="M" />														
+	</h:link>&#xA0;
+	<h:form>	
+	<h:commandLink value="Cerrar Sesion" action="#{ loginBean.logout }"/>	
+	</h:form>												
+</ui:composition>
