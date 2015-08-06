@@ -1,17 +1,22 @@
 package backingBeans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
+//import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import dao.FactoryDAO;
 import model.Usuario;
 
-public class UsuarioBean {
+public class UsuarioBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//att
 	private long id;	
 	private String perfil;
@@ -64,7 +69,8 @@ public class UsuarioBean {
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}		
-		
+	
+	
 	public Usuario getUsuario2() {
 		return usuario2;
 	}
@@ -74,7 +80,7 @@ public class UsuarioBean {
 	}
 	
 	//behavior
-	@PostConstruct
+	/*@PostConstruct
     public void init() {
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         long selectedEntityId = Long.parseLong(params.get("id"));        
@@ -95,30 +101,60 @@ public class UsuarioBean {
         	this.getUsuario2().setPerfil(FactoryDAO.getPerfilDAO().buscaPorID(2));
         	this.getUsuario2().setActivo(true);
         }
-    }	
+    }*/
+	
+	public String editar(){
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        long selectedEntityId = Long.parseLong(params.get("id"));        
+        this.setOper((params.get("oper"))); 
+        this.setEsAlta(false);
+   	    //cargar usuario por id        	
+   	    this.setUsuario2(FactoryDAO.getUsuarioDAO().buscaPorID(selectedEntityId));
+   	    return "/usuario.xhtml?faces-redirect=true";
+	}
+	
+	public String eliminar(){
+		this.setEsAlta(false);
+   	    //cargar usuario por id  
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        long selectedEntityId = Long.parseLong(params.get("id"));        
+   	    this.setUsuario2(FactoryDAO.getUsuarioDAO().buscaPorID(selectedEntityId));
+   	    FactoryDAO.getUsuarioDAO().borrar(this.getUsuario2());
+		return "/usuarios.xhtml?faces-redirect=true"; 
+	}
 	
 	private boolean guardar(){
-		//crea el dao y persiste al nuevo usuario
-		if(this.getUsuario2().getId() == 0){ //alta
-			//this.getUsuario2().setPerfil(FactoryDAO.getPerfilDAO().buscaPorID(2));
+		//crea el dao y persiste al nuevo usuario		
+		if(this.getUsuario2().getId() == 0){ //alta			
 		  FactoryDAO.getUsuarioDAO().persistir(this.getUsuario2());
-		}
-		else{
+		}else{
 			if(this.oper.equals('M')){ //modificación
 			  FactoryDAO.getUsuarioDAO().update(this.getUsuario2());
-			}
-			else{//borrar
-			  FactoryDAO.getUsuarioDAO().borrar(this.getUsuario2());
-			}
+			} 
 		}
 		return true;
+	}
+	
+	public String nuevo(){		
+        this.setOper("A"); 
+        this.setEsAlta(true);
+    	this.setUsuario2(new Usuario());
+    	this.getUsuario2().setId(0);
+    	this.getUsuario2().setPerfil(FactoryDAO.getPerfilDAO().buscaPorID(2));
+    	this.getUsuario2().setActivo(true);
+		return "/usuario.xhtml?faces-redirect=true";
 	}
 	
 	public String registrar(){
 		try{		  
 		  this.guardar();
-		  //limpiar la variable usuario2
-		  return "success";
+		  if(this.getOper().equals("A")){
+			  return "success";
+			  }
+		  else{
+			  //primero determina si el usuario es administrador
+			 return "/bienvenido.xhtml?faces-redirect=true"; 
+		  }
 		}
 		catch(Exception e){
 			//algo dio error

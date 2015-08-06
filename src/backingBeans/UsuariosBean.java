@@ -13,9 +13,9 @@ public class UsuariosBean {
 	
 	public UsuariosBean(){
 		//inicializo lista de usuarios
-		this.setListaUsuarios(FactoryDAO.getUsuarioDAO().listar());
+		//this.setListaUsuarios(FactoryDAO.getUsuarioDAO().listar());
 		//this.usuariosList = new ArrayDataModel<Usuario>((Usuario[]) this.getListaUsuarios().toArray());
-		this.usuariosList = new ArrayDataModel<Usuario>(); 
+		//this.usuariosList = new ArrayDataModel<Usuario>(); 
 	}
 	
 	public void setListaUsuarios(List<Usuario> l){
@@ -27,6 +27,7 @@ public class UsuariosBean {
 	} 
 	
 	public DataModel<Usuario> getUsuariosList(){
+		this.setListaUsuarios(FactoryDAO.getUsuarioDAO().listar());
 		this.usuariosList = new ArrayDataModel<Usuario>(this.listaUsuarios.toArray(new Usuario[this.listaUsuarios.size()]));		
 		return this.usuariosList;
 	}

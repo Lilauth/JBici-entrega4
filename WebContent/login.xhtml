@@ -24,15 +24,17 @@
 						</b:inputSecret>
 					</div>
 				          #{' '}
-				<b:commandButton value="Aceptar" action="#{ loginBean.login}"
+				<b:commandButton value="Aceptar" action="#{ loginBean.login }"
 						look="success" icon="chevron-right" iconAlign="right"></b:commandButton>
+					
 					<h:form>
-						<h:link value="Registrarse" outcome="usuario.xhtml">
+						<h:commandButton value="Registrarse" action="#{ usuarioBean.nuevo }" >
 							<f:param name="id" value="0" />
 							<f:param name="oper" value="A" />
-						</h:link>&#xA0;																										
+						</h:commandButton>																											
 				</h:form>
 				</h:form>
+				
 			</b:navBar>
 
 		</ui:define>

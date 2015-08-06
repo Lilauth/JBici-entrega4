@@ -1,8 +1,12 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+
 import connection.Conexion;
 import model.Usuario;
 
@@ -39,7 +43,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 		}
 	}
 	
-	/**@Override
+	@Override
 	public List<Usuario> listar(){
 		List<Usuario> uActivos = new ArrayList<Usuario>();
 		List<Usuario> usuarios = super.listar();
@@ -49,6 +53,6 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 			}
 		}
 		return uActivos;
-	}*/
+	}
 
 }

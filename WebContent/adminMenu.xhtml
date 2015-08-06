@@ -5,8 +5,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:b="http://bootsfaces.net/ui">
 	<b:navBar brand="JBici" brandHref="bienvenido.xhtml" inverse="true" fixed="top">
-            <b:navbarLinks>
-                <b:navLink value="Usuarios" outcome="usuarios.xhtml"></b:navLink>
+            <b:navbarLinks>           
+                <b:navLink value="Usuarios" href="#"></b:navLink>               
                 <b:navLink value="#{ loginBean.username }" outcome="usuario.xhtml"></b:navLink>
                 <b:dropMenu value="Dropdown">
                     <b:navLink value="Action" href="#"></b:navLink>
@@ -21,13 +21,16 @@
     </b:navBar>
                
     <h:link value="Inicio" outcome="bienvenido.xhtml">														
-	</h:link>&#xA0;	
-    <h:link value="Usuarios" outcome="usuarios.xhtml">														
-	</h:link>&#xA0;	
-	<h:link value="#{ loginBean.username }" outcome="usuario.xhtml">
+	</h:link>&#xA0;
+	
+    <h:link value="Usuarios" outcome="usuarios.xhtml"> </h:link>
+   															
+	<h:form>	
+	<h:commandButton value="#{ loginBean.username }" action="#{ usuarioBean.editar }">
       <f:param name="id" value="#{ loginBean.idUsuario }" />
       <f:param name="oper" value="M" />															
-	</h:link>&#xA0;	
+	</h:commandButton>
+	</h:form>
 	<h:form>	
 	<h:commandLink value="Cerrar Sesion" action="#{ loginBean.logout }"/>	
 	</h:form>					

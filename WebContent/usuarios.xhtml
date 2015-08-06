@@ -38,19 +38,19 @@
     		</h:column>
     		<h:column>
     				<f:facet name="header">Operaciones</f:facet> 
-    				<h:form>    					      				
-						<h:link value="Editar" outcome="usuario.xhtml">							
-							<f:param name="id" value="#{u.id}" />
+    				<h:form>    					      																													
+							<h:commandButton value="Editar" action="#{ usuarioBean.editar }">
 							<f:param name="oper" value="M" />
-						</h:link>&#xA0;																										
+							<f:param name="id" value="#{u.id}" />
+							</h:commandButton>																																			
 						</h:form>												
     		</h:column>	
     		<h:column>    				
     				<h:form>    					      				
-						<h:link value="Eliminar" outcome="usuario.xhtml">							
+						<h:commandButton value="Eliminar" action="#{ usuarioBean.eliminar }">							
 							<f:param name="id" value="#{u.id}" />
 							<f:param name="oper" value="B" />
-						</h:link>&#xA0;																										
+						</h:commandButton>																									
 						</h:form>												
     		</h:column>					
     		<h:column>
