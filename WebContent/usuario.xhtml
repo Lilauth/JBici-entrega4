@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+<html lang="en" 
+    xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"	
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
 <h:body>
 <ui:composition template="templates/defaultLayout.xhtml">
 
 		<ui:define name="header" >
-		    <h:panelGroup rendered="#{ loginBean.esAdmin }">
+		    <h:panelGroup rendered="#{ (loginBean.idUsuario ne -1) and (loginBean.esAdmin) }">
     			<ui:include src="adminMenu.xhtml"/>
  			</h:panelGroup>	   
- 			<h:panelGroup rendered="#{ not loginBean.esAdmin }">
+ 			<h:panelGroup rendered="#{ (loginBean.idUsuario ne -1) and not(loginBean.esAdmin) }">
     			<ui:include src="userMenu.xhtml"/>
+ 			</h:panelGroup>
+ 			<h:panelGroup rendered="#{ loginBean.idUsuario eq -1 }">
+    			<ui:include src="basicMenu.xhtml"/>
  			</h:panelGroup>	    		     		    
 		    <h3>
 		       <h:outputText value="Registro" rendered="#{ usuarioBean.esAlta }" />
@@ -22,6 +27,7 @@
 		</ui:define>
 		
 		<ui:define name="content">
+		<b:well>
 			<h:form id="newUserForm">
 				<h:message for="newUserForm" /> <br />
 				nombre:<h:inputText value="#{ usuarioBean.usuario2.nombre }"></h:inputText>
@@ -44,6 +50,7 @@
 				<h:commandButton value="Aceptar" action="#{ usuarioBean.registrar }"></h:commandButton>				
 				<a href="index.xhtml">Inicio</a>
 			</h:form>
+		</b:well>	
 		</ui:define>
 
 	</ui:composition>
