@@ -106,7 +106,7 @@ public class UsuarioBean implements Serializable{
 	public String editar(){
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         long selectedEntityId = Long.parseLong(params.get("id"));        
-        this.setOper((params.get("oper"))); 
+        this.setOper("M"); 
         this.setEsAlta(false);
    	    //cargar usuario por id        	
    	    this.setUsuario2(FactoryDAO.getUsuarioDAO().buscaPorID(selectedEntityId));
@@ -128,10 +128,8 @@ public class UsuarioBean implements Serializable{
 		if(this.getUsuario2().getId() == 0){ //alta			
 		  FactoryDAO.getUsuarioDAO().persistir(this.getUsuario2());
 		}else{
-			if(this.oper.equals('M')){ //modificación
-			  FactoryDAO.getUsuarioDAO().update(this.getUsuario2());
-			} 
-		}
+			FactoryDAO.getUsuarioDAO().update(this.getUsuario2());
+			} 		
 		return true;
 	}
 	
@@ -151,8 +149,7 @@ public class UsuarioBean implements Serializable{
 		  if(this.getOper().equals("A")){
 			  return "success";
 			  }
-		  else{
-			  //primero determina si el usuario es administrador
+		  else{			 			 
 			 return "/bienvenido.xhtml?faces-redirect=true"; 
 		  }
 		}
