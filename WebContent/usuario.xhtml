@@ -27,30 +27,49 @@
 		</ui:define>
 		
 		<ui:define name="content">
+		<b:container>
 		<b:well>
-			<h:form id="newUserForm">
-				<h:message for="newUserForm" /> <br />
-				nombre:<h:inputText value="#{ usuarioBean.usuario2.nombre }"></h:inputText>
-				apellido:<h:inputText value="#{ usuarioBean.usuario2.apellido }">				          
-				          </h:inputText>				
-				DNI:<h:inputText value="#{ usuarioBean.usuario2.dni }">				          
-				          </h:inputText>  
-				domicilio:<h:inputText value="#{ usuarioBean.usuario2.domicilio }">				          
-				          </h:inputText> 
-				sexo:<h:inputText value="#{ usuarioBean.usuario2.sexo }">				          
-				          </h:inputText>
-				e-mail:<h:inputText value="#{ usuarioBean.usuario2.email }">				          
-				          </h:inputText>
+		<h:form id="newUserForm" styleClass="form-horizontal">			
+				<h:message for="newUserForm" /> 
+				<!-- <h:panelGrid columns="2" cellpadding="5"> -->		
+				
+				<h:outputText value="Nombre:"/>
+				<b:inputText span="12" placeholder="nombre" value="#{ usuarioBean.usuario2.nombre }">  </b:inputText>
+				
+				<h:outputText value="Apellido:"/>
+				<b:inputText span="12" placeholder="apellido" value="#{ usuarioBean.usuario2.apellido }"> </b:inputText>													
+				
+				<h:outputText value="DNI:"/>
+				<b:inputText span="12" placeholder="DNI" value="#{ usuarioBean.usuario2.dni }" > </b:inputText>	
+				
+				<h:outputText value="Domicilio:"/>
+				<b:inputText span="12" placeholder="domicilio" value="#{ usuarioBean.usuario2.domicilio }" > </b:inputText>
+				
+				<h:outputText value="Sexo:"/>
+				<b:inputText span="12" placeholder="Sexo" value="#{ usuarioBean.usuario2.sexo }" > </b:inputText>	
+							
+				<h:outputText value="e-mail:"/>
+				<b:inputText span="12" placeholder="e-mail" value="#{ usuarioBean.usuario2.email }" > </b:inputText>
+														
 				<h:outputText value="password:" rendered="#{ ((usuarioBean.oper ne 'B') or (usuarioBean.esAlta)) }" />
 				<h:inputSecret value="#{ usuarioBean.usuario2.password }" rendered="#{ ((usuarioBean.oper ne 'B') or (usuarioBean.esAlta)) }" />				          				        
 				<h:outputText value="perfil:" rendered="#{ loginBean.esAdmin}"/>		
-				<h:selectOneMenu label="perfil" value="#{ usuarioBean.perfil }" rendered="#{ loginBean.esAdmin }">
+				
+				<b:selectOneMenu label="perfil" value="#{ usuarioBean.perfil }" rendered="#{ loginBean.esAdmin }">
 						 <f:selectItems value="#{ usuarioBean.perfilesDisponibles }" />						
-				</h:selectOneMenu>	                         			          
-				<h:commandButton value="Aceptar" action="#{ usuarioBean.registrar }"></h:commandButton>				
-				<a href="index.xhtml">Inicio</a>
+				</b:selectOneMenu >
+				<h:outputLabel value="Perfil:" rendered="#{ loginBean.esAdmin }" />
+				<b:selectOneMenu value="#{usuarioBean.perfil}" rendered="#{ loginBean.esAdmin }" >
+       			<f:selectItems value="#{usuarioBean.perfilesDisponibles}"/>
+   				</b:selectOneMenu>
+				<b:row>	                         			          
+				<h:commandButton value="Aceptar" action="#{ usuarioBean.registrar }"></h:commandButton>
+				<a href="login.xhtml">Inicio</a>				
+				</b:row>							
+		<!--  	</h:panelGrid>-->			
 			</h:form>
 		</b:well>	
+		</b:container>
 		</ui:define>
 
 	</ui:composition>
