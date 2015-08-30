@@ -46,13 +46,16 @@
 				<b:inputText span="12" placeholder="domicilio" value="#{ usuarioBean.usuario.domicilio }" > </b:inputText>
 				
 				<h:outputText value="Sexo:"/>
-				<b:inputText span="12" placeholder="Sexo" value="#{ usuarioBean.usuario.sexo }" > </b:inputText>	
+				<b:inputText span="12" placeholder="Sexo" value="#{ usuarioBean.usuario.sexo }" > </b:inputText>
+				
+				<h:outputText value="fecha de nacimiento:"/>
+				<b:datepicker span="12" mode="popup-icon" value="#{ usuarioBean.usuario.fechaNacimiento }"></b:datepicker>	
 							
 				<h:outputText value="e-mail:"/>
 				<b:inputText span="12" placeholder="e-mail" value="#{ usuarioBean.usuario.email }" > </b:inputText>
 														
-				<h:outputText value="password:" rendered="#{ ((usuarioBean.oper ne 'B') or (usuarioBean.esAlta)) }" />
-				<b:inputSecret span="12" value="#{ usuarioBean.usuario.password }" rendered="#{ ((usuarioBean.oper ne 'B') or (usuarioBean.esAlta)) }" />				          				        
+				<h:outputText value="password:" rendered="#{ (usuarioBean.esAlta) or (loginBean.idUsuario eq usuarioBean.usuario.id) }" />
+				<b:inputSecret span="12" value="#{ usuarioBean.usuario.password }" rendered="#{ (usuarioBean.esAlta) or (loginBean.idUsuario eq usuarioBean.usuario.id) }" />				          				        
 				
 				<!--  <h:outputText value="perfil:" rendered="#{ loginBean.esAdmin}"/>		
 				
