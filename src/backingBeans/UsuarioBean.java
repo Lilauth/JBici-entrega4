@@ -21,7 +21,7 @@ public class UsuarioBean implements Serializable{
 	private long id;	
 	private String perfil;
 	private List<String> perfilesDisponibles;
-	private Usuario usuario2;
+	private Usuario usuario;
 	private String oper;
 	private boolean esAlta;	
 	
@@ -71,12 +71,12 @@ public class UsuarioBean implements Serializable{
 	}		
 	
 	
-	public Usuario getUsuario2() {
-		return usuario2;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setUsuario2(Usuario usuario2) {
-		this.usuario2 = usuario2;
+	public void setUsuario(Usuario usuario2) {
+		this.usuario = usuario2;
 	}
 	
 	//behavior
@@ -109,7 +109,7 @@ public class UsuarioBean implements Serializable{
         this.setOper("M"); 
         this.setEsAlta(false);
    	    //cargar usuario por id        	
-   	    this.setUsuario2(FactoryDAO.getUsuarioDAO().buscaPorID(selectedEntityId));
+   	    this.setUsuario(FactoryDAO.getUsuarioDAO().buscaPorID(selectedEntityId));
    	    return "/usuario.xhtml?faces-redirect=true";
 	}
 	
@@ -118,17 +118,17 @@ public class UsuarioBean implements Serializable{
    	    //cargar usuario por id  
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         long selectedEntityId = Long.parseLong(params.get("id"));        
-   	    this.setUsuario2(FactoryDAO.getUsuarioDAO().buscaPorID(selectedEntityId));
-   	    FactoryDAO.getUsuarioDAO().borrar(this.getUsuario2());
+   	    this.setUsuario(FactoryDAO.getUsuarioDAO().buscaPorID(selectedEntityId));
+   	    FactoryDAO.getUsuarioDAO().borrar(this.getUsuario());
 		return "/usuarios.xhtml?faces-redirect=true"; 
 	}
 	
 	private boolean guardar(){
 		//crea el dao y persiste al nuevo usuario		
-		if(this.getUsuario2().getId() == 0){ //alta			
-		  FactoryDAO.getUsuarioDAO().persistir(this.getUsuario2());
+		if(this.getUsuario().getId() == 0){ //alta			
+		  FactoryDAO.getUsuarioDAO().persistir(this.getUsuario());
 		}else{
-			FactoryDAO.getUsuarioDAO().update(this.getUsuario2());
+			FactoryDAO.getUsuarioDAO().update(this.getUsuario());
 			} 		
 		return true;
 	}
@@ -136,10 +136,10 @@ public class UsuarioBean implements Serializable{
 	public String nuevo(){		
         this.setOper("A"); 
         this.setEsAlta(true);
-    	this.setUsuario2(new Usuario());
-    	this.getUsuario2().setId(0);
-    	this.getUsuario2().setPerfil(FactoryDAO.getPerfilDAO().buscaPorID(2));
-    	this.getUsuario2().setActivo(true);
+    	this.setUsuario(new Usuario());
+    	this.getUsuario().setId(0);
+    	this.getUsuario().setPerfil(FactoryDAO.getPerfilDAO().buscaPorID(2));
+    	this.getUsuario().setActivo(true);
 		return "/usuario.xhtml?faces-redirect=true";
 	}
 	

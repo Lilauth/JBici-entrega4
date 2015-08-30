@@ -7,7 +7,7 @@
 	<b:navBar brand="JBici" brandHref="bienvenido.xhtml" inverse="true" fixed="top">
             <b:navbarLinks>           
                 <b:navLink value="Usuarios" outcome="usuarios.xhtml"></b:navLink>               
-                <b:navLink value="#{ loginBean.username }" outcome="usuario.xhtml"></b:navLink>
+                <b:navLink value="#{ loginBean.username }" outcome="usuario.xhtml"></b:navLink>                
                 <b:dropMenu value="Dropdown">
                     <b:navLink value="Action" href="#"></b:navLink>
                     <b:navLink value="Another action" href="#"></b:navLink>
@@ -17,6 +17,16 @@
                     <b:navLink value="Separated link" href="#"></b:navLink>
                     <b:navLink value="One more separated link" href="#" tooltipPosition="right"></b:navLink>
                 </b:dropMenu>
+                <h:form styleClass="navbar-form navbar-right" >
+					
+				          #{' '}
+				<h:commandButton value="#{ loginBean.username }" action="#{ usuarioBean.editar }"
+						look="link" icon="chevron-right" iconAlign="right">
+						 <f:param name="id" value="#{ loginBean.idUsuario }" />
+                         <f:param name="oper" value="M" />	
+                </h:commandButton>																
+				</h:form>					
+					
             </b:navbarLinks>
     </b:navBar>
                

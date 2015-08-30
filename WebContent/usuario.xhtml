@@ -34,33 +34,34 @@
 				<!-- <h:panelGrid columns="2" cellpadding="5"> -->		
 				
 				<h:outputText value="Nombre:"/>
-				<b:inputText span="12" placeholder="nombre" value="#{ usuarioBean.usuario2.nombre }">  </b:inputText>
+				<b:inputText span="12" placeholder="nombre" value="#{ usuarioBean.usuario.nombre }">  </b:inputText>
 				
 				<h:outputText value="Apellido:"/>
-				<b:inputText span="12" placeholder="apellido" value="#{ usuarioBean.usuario2.apellido }"> </b:inputText>													
+				<b:inputText span="12" placeholder="apellido" value="#{ usuarioBean.usuario.apellido }"> </b:inputText>													
 				
 				<h:outputText value="DNI:"/>
-				<b:inputText span="12" placeholder="DNI" value="#{ usuarioBean.usuario2.dni }" > </b:inputText>	
+				<b:inputText span="12" placeholder="DNI" value="#{ usuarioBean.usuario.dni }" > </b:inputText>	
 				
 				<h:outputText value="Domicilio:"/>
-				<b:inputText span="12" placeholder="domicilio" value="#{ usuarioBean.usuario2.domicilio }" > </b:inputText>
+				<b:inputText span="12" placeholder="domicilio" value="#{ usuarioBean.usuario.domicilio }" > </b:inputText>
 				
 				<h:outputText value="Sexo:"/>
-				<b:inputText span="12" placeholder="Sexo" value="#{ usuarioBean.usuario2.sexo }" > </b:inputText>	
+				<b:inputText span="12" placeholder="Sexo" value="#{ usuarioBean.usuario.sexo }" > </b:inputText>	
 							
 				<h:outputText value="e-mail:"/>
-				<b:inputText span="12" placeholder="e-mail" value="#{ usuarioBean.usuario2.email }" > </b:inputText>
+				<b:inputText span="12" placeholder="e-mail" value="#{ usuarioBean.usuario.email }" > </b:inputText>
 														
 				<h:outputText value="password:" rendered="#{ ((usuarioBean.oper ne 'B') or (usuarioBean.esAlta)) }" />
-				<h:inputSecret value="#{ usuarioBean.usuario2.password }" rendered="#{ ((usuarioBean.oper ne 'B') or (usuarioBean.esAlta)) }" />				          				        
-				<h:outputText value="perfil:" rendered="#{ loginBean.esAdmin}"/>		
+				<b:inputSecret span="12" value="#{ usuarioBean.usuario.password }" rendered="#{ ((usuarioBean.oper ne 'B') or (usuarioBean.esAlta)) }" />				          				        
+				
+				<!--  <h:outputText value="perfil:" rendered="#{ loginBean.esAdmin}"/>		
 				
 				<b:selectOneMenu label="perfil" value="#{ usuarioBean.perfil }" rendered="#{ loginBean.esAdmin }">
 						 <f:selectItems value="#{ usuarioBean.perfilesDisponibles }" />						
-				</b:selectOneMenu >
-				<h:outputLabel value="Perfil:" rendered="#{ loginBean.esAdmin }" />
-				<b:selectOneMenu value="#{usuarioBean.perfil}" rendered="#{ loginBean.esAdmin }" >
-       			<f:selectItems value="#{usuarioBean.perfilesDisponibles}"/>
+				</b:selectOneMenu >-->
+				<h:outputText value="perfil:" for="per" rendered="#{ loginBean.esAdmin }" />					
+					<b:selectOneMenu value="#{usuarioBean.perfil}" span="12" id="per" rendered="#{ loginBean.esAdmin }" >
+       				<f:selectItems value="#{usuarioBean.perfilesDisponibles}"/>
    				</b:selectOneMenu>
 				<b:row>	                         			          
 				<h:commandButton value="Aceptar" action="#{ usuarioBean.registrar }"></h:commandButton>
