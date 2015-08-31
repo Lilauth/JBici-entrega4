@@ -110,6 +110,7 @@ public class UsuarioBean implements Serializable{
         this.setEsAlta(false);
    	    //cargar usuario por id        	
    	    this.setUsuario(FactoryDAO.getUsuarioDAO().buscaPorID(selectedEntityId));
+   	    this.perfil = this.getUsuario().getPerfil().getDescripcion();
    	    return "/usuario.xhtml?faces-redirect=true";
 	}
 	

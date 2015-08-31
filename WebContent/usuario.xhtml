@@ -61,7 +61,8 @@
 				
 				<b:selectOneMenu label="perfil" value="#{ usuarioBean.perfil }" rendered="#{ loginBean.esAdmin }">
 						 <f:selectItems value="#{ usuarioBean.perfilesDisponibles }" />						
-				</b:selectOneMenu >-->
+				</b:selectOneMenu >
+				-->
 				<h:outputText value="perfil:" for="per" rendered="#{ loginBean.esAdmin }" />					
 					<b:selectOneMenu value="#{usuarioBean.perfil}" span="12" id="per" rendered="#{ loginBean.esAdmin }" >
        				<f:selectItems value="#{usuarioBean.perfilesDisponibles}"/>
