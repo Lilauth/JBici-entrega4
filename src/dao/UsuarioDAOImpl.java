@@ -32,6 +32,7 @@ public class UsuarioDAOImpl extends BaseDAOImpl<Usuario> implements IUsuarioDAO 
 	
 	@Override
 	public void borrar(Usuario u){
+		//pasa activo a false
 		u.setActivo(false);
 		EntityManager em = Conexion.getEntityManager();
 		try {				

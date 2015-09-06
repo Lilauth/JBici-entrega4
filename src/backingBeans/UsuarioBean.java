@@ -110,6 +110,7 @@ public class UsuarioBean implements Serializable{
         this.setEsAlta(false);
    	    //cargar usuario por id        	
    	    this.setUsuario(FactoryDAO.getUsuarioDAO().buscaPorID(selectedEntityId));
+   	    this.setId(selectedEntityId);
    	    this.perfil = this.getUsuario().getPerfil().getDescripcion();
    	    return "/usuario.xhtml?faces-redirect=true";
 	}
@@ -128,7 +129,14 @@ public class UsuarioBean implements Serializable{
 		//crea el dao y persiste al nuevo usuario		
 		if(this.getUsuario().getId() == 0){ //alta			
 		  FactoryDAO.getUsuarioDAO().persistir(this.getUsuario());
-		}else{
+		}
+		else{ //modificación
+			if(perfil.equals("administrador")){
+				usuario.setPerfil(FactoryDAO.getPerfilDAO().buscaPorID(1));
+			} 
+			else{
+				usuario.setPerfil(FactoryDAO.getPerfilDAO().buscaPorID(2));
+			}
 			FactoryDAO.getUsuarioDAO().update(this.getUsuario());
 			} 		
 		return true;
