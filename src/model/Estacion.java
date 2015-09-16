@@ -101,6 +101,10 @@ public class Estacion {
 		//
 	}
 	
+	public String toString(){
+		return this.getNombre();
+	}
+	
 	public int cantidadEstacionamientosLibres(){
 		//return cantEstacionamientos - bicisDisponibles.size();
 		return 0;
