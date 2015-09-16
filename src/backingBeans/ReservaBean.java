@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.event.ComponentSystemEvent;
-
 import dao.FactoryDAO;
 import model.Estacion;
 
@@ -15,9 +13,23 @@ public class ReservaBean implements Serializable{
 	private List<Estacion> estaciones;
     private Estacion estacionOrigen;
     
-    public void init(ComponentSystemEvent e){
-    	this.estaciones = new ArrayList<>();
-    	this.estaciones = FactoryDAO.getEstacionDAO().listar();
+    public ReservaBean(){    	
+    	this.estaciones = FactoryDAO.getEstacionDAO().listar();	
+    	this.estacionOrigen = FactoryDAO.getEstacionDAO().buscaPorID(1);
     }
+
+	public List<Estacion> getEstaciones() {
+		return estaciones;
+	}
+
+	public Estacion getEstacionOrigen() {
+		return estacionOrigen;
+	}
+
+	public void setEstacionOrigen(Estacion estacionOrigen) {
+		this.estacionOrigen = estacionOrigen;
+	}
+    
+    
 
 }

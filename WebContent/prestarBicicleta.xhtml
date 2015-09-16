@@ -20,15 +20,39 @@
 		<ui:define name="content">
 			<b:container>
 				<b:well>
-					<h:form id="prestarBici" styleClass="form-horizontal">
+					
+					
+					<h:dataTable value="#{reservaBean.estaciones}" var="est">
+
+				<h:column>
+
+					<f:facet name="header">First Name</f:facet>
+    			#{est.nombre}
+ 
+    		</h:column>
+
+				<h:column>
+
+					<f:facet name="header">Last Name</f:facet>
+    			#{est.id}
+ 
+    		</h:column>
+				
+    															
+			</h:dataTable>
+					
+				</b:well>
+				
+				<h:form id="prestarBici" styleClass="form-horizontal">
 						<h:message for="prestarBici" />
 						
 						<h:outputText value="estacion:" for="est" />					
-							<b:selectOneMenu value="#{reservaBean.estacionOrigen}" span="12" id="est" >
-       							<f:selectItems value="#{reservaBean.estacionesDisponibles}"/>
+							<b:selectOneMenu value="#{reservaBean.estacionOrigen}" span="12" >
+       							<f:selectItems value="#{reservaBean.estaciones}"/>
    							</b:selectOneMenu>
+   							
+   							
 					</h:form>
-				</b:well>
 			</b:container>
 		</ui:define>
 

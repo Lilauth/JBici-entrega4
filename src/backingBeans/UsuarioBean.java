@@ -79,30 +79,6 @@ public class UsuarioBean implements Serializable{
 		this.usuario = usuario2;
 	}
 	
-	//behavior
-	/*@PostConstruct
-    public void init() {
-        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        long selectedEntityId = Long.parseLong(params.get("id"));        
-        this.setOper((params.get("oper"))); 
-        //cargar usuario por id        
-        if(!this.getOper().equals("A")) { //si es A, es un registro
-        	this.setEsAlta(false);
-        	 //cargar usuario por id        	
-        	 this.setUsuario2(FactoryDAO.getUsuarioDAO().buscaPorID(selectedEntityId));
-        	 if(this.getOper().equals("B")){ //quieren eliminar al usuario
-        		 FactoryDAO.getUsuarioDAO().borrar(this.getUsuario2());         		
-        	 }        	 
-        }
-        else{
-        	this.setEsAlta(true);
-        	this.setUsuario2(new Usuario());
-        	this.getUsuario2().setId(0);
-        	this.getUsuario2().setPerfil(FactoryDAO.getPerfilDAO().buscaPorID(2));
-        	this.getUsuario2().setActivo(true);
-        }
-    }*/
-	
 	public String editar(){
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         long selectedEntityId = Long.parseLong(params.get("id"));        
