@@ -20,6 +20,16 @@
 		<managed-bean-class>backingBeans.UsuariosBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>prestamoBean</managed-bean-name>
+		<managed-bean-class>backingBeans.PrestamoBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>prestamosBean</managed-bean-name>
+		<managed-bean-class>backingBeans.PrestamosBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
 	
 	<navigation-rule>
       <from-view-id>/login.xhtml</from-view-id>

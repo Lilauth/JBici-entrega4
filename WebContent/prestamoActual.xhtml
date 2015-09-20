@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+<h:body>
+
+	<ui:composition template="templates/defaultLayout.xhtml">
+
+		<ui:define name="header">
+			<ui:include src="userMenu.xhtml" />
+
+			<h3>
+				<h:outputText value="Reservar Bicicleta" />
+			</h3>
+		</ui:define>
+		<ui:define name="content">
+			<b:container>
+				<b:well>
+					<h:form id="prestarBici" styleClass="form-horizontal">
+						<h:message for="prestarBici" />
+
+						<h:outputText value="estacion:" for="est" />
+						<b:selectOneMenu value="#{prestamoBean.estacionOrigen}" span="12">
+							<f:selectItems value="#{prestamoBean.estaciones}" />
+						</b:selectOneMenu>
+						<h:outputText value="Cantidad:" />
+						<b:inputText span="12" placeholder="cantidad"
+							value="#{ prestamoBean.cantidad }">
+						</b:inputText>
+						<b:row>
+							<h:commandButton value="Aceptar"
+								action="#{ prestamoBean.guardar }"></h:commandButton>
+							<a href="bienvenido.xhtml">Inicio</a>
+						</b:row>
+					</h:form>
+				</b:well>
+			</b:container>
+		</ui:define>
+
+
+	</ui:composition>
+
+</h:body>
+
+</html>
