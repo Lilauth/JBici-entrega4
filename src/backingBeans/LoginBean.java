@@ -3,6 +3,7 @@ package backingBeans;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import model.Perfil;
 import model.Usuario;
 import dao.FactoryDAO;
 
@@ -67,7 +68,7 @@ public class LoginBean {
 	private boolean match(){
 		Usuario user = FactoryDAO.getUsuarioDAO().buscarPorEMail(this.username);
 		if(user != null){		
-		  this.setEsAdmin(user.getPerfil().getDescripcion().equals("administrador"));
+		  this.setEsAdmin(user.getPerfil() == Perfil.ADMINISTRADOR);
 		  this.setIdUsuario(user.getId());
 		  if(user.getPassword().equals(this.password)){
 			  this.setUsuario(user);			  

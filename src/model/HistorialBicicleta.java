@@ -13,8 +13,6 @@ public class HistorialBicicleta {
 	@Id @GeneratedValue
 	private long id;
 	
-	@ManyToOne(optional = false)
-	@JoinColumn(name="idEstadoBicicleta")
 	private EstadoBicicleta estado;
 	
 	private Date fechaYHora;

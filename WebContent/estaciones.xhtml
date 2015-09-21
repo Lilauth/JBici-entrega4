@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+<h:body>
+	
+	<ui:composition template="templates/defaultLayout.xhtml">
+	<ui:define name="header">
+	<ui:include src="adminMenu.xhtml" />
+	</ui:define>
+	
+		<ui:define name="content">
+			<h3>Estaciones</h3>
+			<h:dataTable value="#{usuariosBean.usuariosList}" var="u">
+
+				<h:column>
+
+					<f:facet name="header">First Name</f:facet>
+    			#{u.nombre}
+ 
+    		</h:column>
+
+				<h:column>
+
+					<f:facet name="header">Last Name</f:facet>
+    			#{u.apellido}
+ 
+    		</h:column>
+    		<h:column>
+
+					<f:facet name="header">Perfil</f:facet>
+    			#{u.perfil}
+ 
+    		</h:column>
+
+				<h:column>
+
+					<f:facet name="header">mail</f:facet>
+    			#{u.email}
+ 
+    		</h:column>
+    		<h:column>
+    				<f:facet name="header">Operaciones</f:facet> 
+    				<h:form>    					      																													
+							<h:commandButton value="Editar" action="#{ usuarioBean.editar }">
+							<f:param name="oper" value="M" />
+							<f:param name="id" value="#{u.id}" />
+							</h:commandButton>																																			
+						</h:form>												
+    		</h:column>	
+    		<h:column>    				
+    				<h:form>    					      				
+						<h:commandButton value="Eliminar" action="#{ usuarioBean.eliminar }">							
+							<f:param name="id" value="#{u.id}" />
+							<f:param name="oper" value="B" />
+						</h:commandButton>																									
+						</h:form>												
+    		</h:column>					
+    		<h:column>
+    					<f:facet name="header" escape = "false">Estad&iacute;sticas</f:facet>
+    				<h:form action="get">
+    					       					
+						<h:link value="Estad&iacute;sticas" escape="false" outcome="estadisticas.html">							
+							<f:param name="idUsuario" value="#{u.id}" />							
+						</h:link>&#xA0;																										
+						</h:form>												
+    		</h:column>														
+			</h:dataTable>
+			<h:link value="Estad&iacute;sticas Generales" escape="false" outcome="estadisticasGenerales.html">															
+						</h:link>&#xA0;	
+		</ui:define>
+	</ui:composition>
+	
+</h:body>
+
+</html>

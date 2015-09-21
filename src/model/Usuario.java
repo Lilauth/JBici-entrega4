@@ -1,13 +1,10 @@
 package model;
 
 import java.util.Date;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Usuario {
@@ -23,8 +20,6 @@ public class Usuario {
 	private String password;
 	private boolean activo;
 	
-	@ManyToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "idPerfil")
 	private Perfil perfil;
 	
 	public Usuario(){}

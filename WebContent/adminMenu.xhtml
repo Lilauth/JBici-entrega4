@@ -6,9 +6,15 @@
 	<b:navBar brand="JBici" brandHref="bienvenido.xhtml" inverse="true"
 		fixed="top">
 		<b:navbarLinks>
-			<b:navLink value="Usuarios" outcome="usuarios.xhtml"></b:navLink>		  	
-			<b:dropMenu value="Dropdown">
-				<b:navLink value="Action" href="#"></b:navLink>
+			<!--  <b:navLink value="Usuarios" outcome="usuarios.xhtml"></b:navLink>	 -->	  	
+			<b:dropMenu value="Datos Generales">
+				<b:navLink header="Usuarios"></b:navLink>
+				<b:navLink value="ABM de Usuarios" outcome="usuarios.xhtml"></b:navLink>
+				<b:navLink header="Estaciones"></b:navLink>
+				<b:navLink value="ABM de Estaciones" outcome="estaciones.xhtml"></b:navLink>
+				<b:navLink value="ABM de Bicicletas" outcome="bicicletas.xhtml"></b:navLink>
+					
+				<!-- 	
 				<b:navLink value="Another action" href="#"></b:navLink>
 				<b:navLink value="Something else here" href="#"></b:navLink>
 				<b:navLink></b:navLink>
@@ -16,6 +22,17 @@
 				<b:navLink value="Separated link" href="#"></b:navLink>
 				<b:navLink value="One more separated link" href="#"
 					tooltipPosition="right"></b:navLink>
+				 -->
+			</b:dropMenu>
+			
+			<b:dropMenu value="Informes">
+				<b:navLink header="Estadisticas de Usuarios"></b:navLink>
+				<b:navLink value="Informe 1" outcome="usuarios.xhtml"></b:navLink>
+				<b:navLink value="Informe 2" outcome="usuarios.xhtml"></b:navLink>
+				<b:navLink header="Estadisticas de Estaciones"></b:navLink>
+				<b:navLink value="Informe 3" outcome="usuarios.xhtml"></b:navLink>
+				<b:navLink value="Informe 4" outcome="usuarios.xhtml"></b:navLink>
+
 			</b:dropMenu>
 			<h:form styleClass="navbar-form navbar-right">
 				<h:commandButton value="#{ loginBean.username }"

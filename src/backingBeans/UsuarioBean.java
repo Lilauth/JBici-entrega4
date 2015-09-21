@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import dao.FactoryDAO;
+import model.Perfil;
 import model.Usuario;
 
 public class UsuarioBean implements Serializable{
@@ -19,8 +20,8 @@ public class UsuarioBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 	//att
 	private long id;	
-	private String perfil;
-	private List<String> perfilesDisponibles;
+	private Perfil perfil;
+	private Perfil[] perfilesDisponibles;
 	private Usuario usuario;
 	private String oper;
 	private boolean esAlta;	
@@ -44,9 +45,8 @@ public class UsuarioBean implements Serializable{
 
 	//const
 	public UsuarioBean(){		
-		perfilesDisponibles = new ArrayList<String>();
-		perfilesDisponibles.add(FactoryDAO.getPerfilDAO().buscaPorID(1).getDescripcion());
-		perfilesDisponibles.add(FactoryDAO.getPerfilDAO().buscaPorID(2).getDescripcion());
+		perfilesDisponibles = Perfil.values();
+
 	}
 	
 	//setters and getters
@@ -58,15 +58,15 @@ public class UsuarioBean implements Serializable{
 		this.id = id;
 	}
 		
-	public String getPerfil() {
+	public Perfil getPerfil() {
 		return perfil;
 	}
 	
-	public List<String> getPerfilesDisponibles(){		
+	public Perfil[] getPerfilesDisponibles(){		
 		return this.perfilesDisponibles;
 	}
 
-	public void setPerfil(String perfil) {
+	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}		
 	
@@ -87,7 +87,7 @@ public class UsuarioBean implements Serializable{
    	    //cargar usuario por id        	
    	    this.setUsuario(FactoryDAO.getUsuarioDAO().buscaPorID(selectedEntityId));
    	    id = selectedEntityId;
-   	    this.perfil = this.getUsuario().getPerfil().getDescripcion();
+   	    this.perfil = this.getUsuario().getPerfil();
    	    return "/usuario.xhtml?faces-redirect=true";
 	}
 	
@@ -107,12 +107,13 @@ public class UsuarioBean implements Serializable{
 		  FactoryDAO.getUsuarioDAO().persistir(this.getUsuario());
 		}
 		else{ //modificación
-			if(perfil.equals("administrador")){
+			/*if(perfil.equals("administrador")){
 				usuario.setPerfil(FactoryDAO.getPerfilDAO().buscaPorID(1));
 			} 
 			else{
 				usuario.setPerfil(FactoryDAO.getPerfilDAO().buscaPorID(2));
-			}
+			}*/
+			usuario.setPerfil(perfil);
 			FactoryDAO.getUsuarioDAO().update(this.getUsuario());
 			} 		
 		return true;
@@ -123,7 +124,7 @@ public class UsuarioBean implements Serializable{
         this.setEsAlta(true);
     	this.setUsuario(new Usuario());
     	this.getUsuario().setId(0);
-    	this.getUsuario().setPerfil(FactoryDAO.getPerfilDAO().buscaPorID(2));
+    	this.getUsuario().setPerfil(Perfil.USUARIO);
     	this.getUsuario().setActivo(true);
 		return "/usuario.xhtml?faces-redirect=true";
 	}

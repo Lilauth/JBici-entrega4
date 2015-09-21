@@ -30,8 +30,6 @@ public class Bicicleta {
 	@OneToMany(mappedBy="bicicleta")
 	private List<HistorialBicicleta> historial;
 	
-	@ManyToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "idEstadoBicicleta")
 	private EstadoBicicleta estadoActual;
 	
 	/*getters and setters*/
