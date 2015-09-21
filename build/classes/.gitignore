@@ -1,7 +1,4 @@
-/aspects/
 /backingBeans/
-/connection/
-/dao/
-/filters/
+/inicilizacion/
 /model/
-/services/
+/dao/

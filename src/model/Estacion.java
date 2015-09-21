@@ -19,8 +19,6 @@ public class Estacion {
 	private long id;	
 	private String nombre;
 	
-	@ManyToOne(cascade = { CascadeType.ALL })
-	@JoinColumn(name = "idEstadoEstacion")
 	private EstadoEstacion estado;
 	private int cantBiciletas;
 	private int cantEstacionamientos;
