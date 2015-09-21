@@ -12,7 +12,18 @@ public class LoginBean {
 	private String password;
 	private long idUsuario;
 	private boolean esAdmin;	
+	private Usuario usuario;
 	
+	
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	public LoginBean() {
 		this.nuevaSesion();	
 	}
@@ -54,10 +65,13 @@ public class LoginBean {
 	}
 	//behavior
 	private boolean match(){
-		Usuario user =FactoryDAO.getUsuarioDAO().buscarPorEMail(this.username);
+		Usuario user = FactoryDAO.getUsuarioDAO().buscarPorEMail(this.username);
 		if(user != null){		
 		  this.setEsAdmin(user.getPerfil().getDescripcion().equals("administrador"));
 		  this.setIdUsuario(user.getId());
+		  if(user.getPassword().equals(this.password)){
+			  this.setUsuario(user);			  
+		  }
 		  return(user.getPassword().equals(this.password));
 		}
 		else{
