@@ -36,7 +36,8 @@
 			</b:dropMenu>
 			<h:form styleClass="navbar-form navbar-right">
 				<h:commandButton value="#{ loginBean.username }"
-								 action="#{ usuarioBean.editar }">
+								 action="#{ usuarioBean.modificarDatos }">
+								 <!-- // TODO recuperar usuario de la sesion en el bean  -->
 					<f:param name="id" value="#{ loginBean.idUsuario }" />
 					<f:param name="oper" value="M" />
 				</h:commandButton>

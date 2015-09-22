@@ -31,16 +31,21 @@
 		<b:well>
 		<h:form id="newUserForm" styleClass="form-horizontal">			
 				<h:message for="newUserForm" /> 
-				<!-- <h:panelGrid columns="2" cellpadding="5"> -->		
+						
+				<!-- <h:panelGrid columns="2" cellpadding="5"> -->
+						
 				
+				<b:messages id="nachrichten" showDetail="true" showSummary="false" />
 				<h:outputText value="Nombre:"/>
-				<b:inputText span="12" placeholder="nombre" value="#{ usuarioBean.usuario.nombre }">  </b:inputText>
+				<b:inputText span="12" placeholder="nombre" id="nombre" value="#{ usuarioBean.usuario.nombre }" required="true" requiredMessage="Nombre: se necesita un valor ">  </b:inputText>
+
+				<h:outputLabel value="Apellido:" for="apellido" />
+				<b:inputText span="12" placeholder="apellido" id="apellido" value="#{ usuarioBean.usuario.apellido }" required="true"  requiredMessage="Apellido: se necesita un valor"> </b:inputText>	
+				<h:message for="apellido" />
+							
 				
-				<h:outputText value="Apellido:"/>
-				<b:inputText span="12" placeholder="apellido" value="#{ usuarioBean.usuario.apellido }"> </b:inputText>													
-				
-				<h:outputText value="DNI:"/>
-				<b:inputText span="12" placeholder="DNI" value="#{ usuarioBean.usuario.dni }" > </b:inputText>	
+				<h:outputLabel value="DNI:" for="dni"/>
+				<b:inputText span="12" placeholder="DNI" id="dni" value="#{ usuarioBean.usuario.dni }" > </b:inputText>	
 				
 				<h:outputText value="Domicilio:"/>
 				<b:inputText span="12" placeholder="domicilio" value="#{ usuarioBean.usuario.domicilio }" > </b:inputText>
@@ -52,24 +57,23 @@
 				<b:datepicker span="12" mode="popup-icon" value="#{ usuarioBean.usuario.fechaNacimiento }"></b:datepicker>	
 							
 				<h:outputText value="e-mail:"/>
-				<b:inputText span="12" placeholder="e-mail" value="#{ usuarioBean.usuario.email }" > </b:inputText>
-														
+				<b:inputText span="12" placeholder="e-mail" id="e-mail" value="#{ usuarioBean.usuario.email }" required="true"  requiredMessage="E-mail: se necesita un valor"> </b:inputText>
+
+
 				<h:outputText value="password:" rendered="#{ (usuarioBean.esAlta) or (loginBean.idUsuario eq usuarioBean.usuario.id) }" />
-				<b:inputSecret span="12" value="#{ usuarioBean.usuario.password }" rendered="#{ (usuarioBean.esAlta) or (loginBean.idUsuario eq usuarioBean.usuario.id) }" />				          				        
+				<b:inputSecret span="12" value="#{ usuarioBean.usuario.password }" rendered="#{ (usuarioBean.esAlta) or (loginBean.idUsuario eq usuarioBean.usuario.id) }"  required="true"  requiredMessage="Password: se necesita un valor" />				          				        
 				
-				<!--  <h:outputText value="perfil:" rendered="#{ loginBean.esAdmin}"/>		
-				
-				<b:selectOneMenu label="perfil" value="#{ usuarioBean.perfil }" rendered="#{ loginBean.esAdmin }">
-						 <f:selectItems value="#{ usuarioBean.perfilesDisponibles }" />						
-				</b:selectOneMenu >
-				-->
+
 				<h:outputText value="perfil:" for="per" rendered="#{ loginBean.esAdmin }" />					
-					<b:selectOneMenu value="#{usuarioBean.perfil}" span="12" id="per" rendered="#{ loginBean.esAdmin }" >
+					<b:selectOneMenu value="#{usuarioBean.usuario.perfil}" span="12" id="per" rendered="#{ loginBean.esAdmin }" >
        				<f:selectItems value="#{usuarioBean.perfilesDisponibles}"/>
    				</b:selectOneMenu>
-				<b:row>	                         			          
-				<h:commandButton value="Aceptar" action="#{ usuarioBean.registrar }"></h:commandButton>
-				<a href="bienvenido.xhtml">Inicio</a>				
+				<b:row>	   
+				                      			          
+				<b:commandButton value="Aceptar" action="#{ usuarioBean.guardar }" icon="chevron-right" iconAlign="right" look="success"></b:commandButton>
+				
+				<h:link value="Cancelar" outcome="#{ usuarioBean.cancelarURL }" styleClass="btn btn-default" ></h:link>
+				
 				</b:row>							
 		<!--  	</h:panelGrid>-->			
 			</h:form>
