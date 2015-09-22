@@ -28,8 +28,8 @@ public class FactoryDAO {
 		return new BaseDAOImpl<HistorialBicicleta>(HistorialBicicleta.class, Conexion.getEntityManager());
 	}
 	
-	public static IBaseDAO<PrestamoActual> getPrestamoActualDAO(){
-		return new BaseDAOImpl<PrestamoActual>(PrestamoActual.class, Conexion.getEntityManager());
+	public static IPrestamoActualDAO getPrestamoActualDAO(){
+		return new PrestamoActualDAOImpl(PrestamoActual.class, Conexion.getEntityManager());
 	}
 	
 	public static IBaseDAO<PrestamoHistorico> getPrestamoHistoricoDAO(){

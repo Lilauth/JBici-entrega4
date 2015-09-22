@@ -51,9 +51,8 @@ public class PrestamosBean implements Serializable{
 		this.listaPrestamosActuales = listaPrestamosActuales;
 	}
 
-	public DataModel<PrestamoActual> getPrestamosActualesList() {	
-		
-		this.setListaPrestamosActuales(FactoryDAO.getPrestamoActualDAO().listar());		
+	public DataModel<PrestamoActual> getPrestamosActualesList() {			
+		this.setListaPrestamosActuales(FactoryDAO.getPrestamoActualDAO().listar(this.loginBean.getUsuario()));		
 		this.prestamosActualesList = new ArrayDataModel<PrestamoActual>(this.listaPrestamosActuales.toArray(new PrestamoActual[this.listaPrestamosActuales.size()]));
 		return prestamosActualesList;
 	}
