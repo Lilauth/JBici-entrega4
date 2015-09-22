@@ -1,4 +1,4 @@
-package inicilizacion;
+package inicializacion;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
