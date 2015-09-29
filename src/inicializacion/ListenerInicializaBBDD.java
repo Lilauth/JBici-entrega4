@@ -64,16 +64,14 @@ public class ListenerInicializaBBDD implements ServletContextListener {
     	IBaseDAO<Estacion> daoEstacion = FactoryDAO.getEstacionDAO();
     	if (daoEstacion.listar().isEmpty()){
     		Estacion pzaSanMartin = new Estacion();
-    		pzaSanMartin.setCantEstacionamientos(40);
-    		pzaSanMartin.setCantBiciletas(10);
+    		pzaSanMartin.setCantEstacionamientos(40);    		
     		pzaSanMartin.setNombre("Plaza San Martín");
     		pzaSanMartin.setUbicacion(-34.918131995447354, -57.948323906781006);
     		pzaSanMartin.setEstado(EstadoEstacion.OPERATIVA);
     		daoEstacion.persistir(pzaSanMartin);
     		
     		Estacion pzaIslasMalvinas = new Estacion();
-    		pzaIslasMalvinas.setCantEstacionamientos(40);
-    		pzaIslasMalvinas.setCantBiciletas(10);
+    		pzaIslasMalvinas.setCantEstacionamientos(40);    	
     		pzaIslasMalvinas.setNombre("Plaza Islas Malvinas");
     		pzaIslasMalvinas.setUbicacion(-34.9274944, -57.9611928);
     		pzaIslasMalvinas.setEstado(EstadoEstacion.OPERATIVA);
