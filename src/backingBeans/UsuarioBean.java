@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import dao.FactoryDAO;
+import dao.IUsuarioDAO;
 import model.Perfil;
 import model.Usuario;
 
@@ -68,11 +69,12 @@ public class UsuarioBean implements Serializable{
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         long idUsuario = Long.parseLong(params.get("id"));   
         
+        IUsuarioDAO daoUsuario = FactoryDAO.getUsuarioDAO(); 
         // cargar usuario por id 
-   	    usuario = FactoryDAO.getUsuarioDAO().buscaPorID(idUsuario);
+   	    usuario = daoUsuario.buscaPorID(idUsuario);
    	    
    	    // Borro el usuario
-   	    FactoryDAO.getUsuarioDAO().borrar(usuario);
+   	    daoUsuario.borrar(usuario);
    	    
    	    // Retorno al listado de usuarios (solo el admin puede borrar usuarios desde el listado de usuarios)
 		return "/usuarios.xhtml?faces-redirect=true"; 

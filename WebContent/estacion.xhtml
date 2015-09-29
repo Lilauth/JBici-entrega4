@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" 
+    xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"	
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+<h:body>
+	<ui:composition template="templates/defaultLayout.xhtml">
+	<ui:define name="header">
+	<ui:include src="adminMenu.xhtml" />
+		<h3>
+		       <h:outputText value="Nueva Estacion" rendered="#{ estacionBean.esAlta }" />
+		       <h:outputText value="Modifica Estacion" rendered="#{ not estacionBean.esAlta}"/>		    
+		</h3>
+	</ui:define>
+	
+
+		
+		<ui:define name="content">
+		<b:container>
+		<b:well>
+		<h:form id="newUserForm" styleClass="form-horizontal">			
+				<h:message for="newUserForm" /> 
+						
+				<!-- <h:panelGrid columns="2" cellpadding="5"> -->
+						
+				
+				<b:messages id="nachrichten" showDetail="true" showSummary="false" />
+				<h:outputText value="Nombre:"/>
+				<b:inputText span="12" placeholder="nombre" id="nombre" value="#{ estacionBean.estacion.nombre }" required="true" requiredMessage="Nombre: se necesita un valor ">  </b:inputText>
+
+				<h:outputLabel value="Cant. Estacionamientos:" for="apellido" />
+				<b:inputText span="12" placeholder="apellido" id="apellido" value="#{ estacionBean.estacion.cantEstacionamientos }" required="true"  requiredMessage="Cant. Estacionamientos: se necesita un valor"> </b:inputText>	
+				<h:message for="apellido" />
+
+				<h:outputText value="Estado:" for="per" />					
+					<b:selectOneMenu value="#{estacionBean.estacion.estado}" span="12" id="per" >
+       				<f:selectItems value="#{estacionBean.estadosDisponibles}"/>
+   				</b:selectOneMenu>
+				<b:row>	   
+				                      			          
+				<b:commandButton value="Aceptar" action="#{ estacionBean.guardar }" icon="chevron-right" iconAlign="right" look="success"></b:commandButton>
+				
+				<h:link value="Cancelar" outcome="#{ estacionBean.cancelarURL }" styleClass="btn btn-default" ></h:link>
+				
+				</b:row>							
+		<!--  	</h:panelGrid>-->			
+			</h:form>
+		</b:well>	
+		</b:container>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

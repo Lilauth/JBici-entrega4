@@ -17,7 +17,7 @@ public class Estacion {
 	private String nombre;
 	
 	private EstadoEstacion estado;
-	private int estacionamientos;
+	private int cantEstacionamientos;
 	@OneToMany(mappedBy="estacionActual")
 	private List<Bicicleta> bicicletas;
 	private double latitud;
@@ -71,11 +71,11 @@ public class Estacion {
 	}
 	
 	public int getCantEstacionamientos() {
-		return estacionamientos;
+		return cantEstacionamientos;
 	}
 	
 	public void setCantEstacionamientos(int cantEstacionamientos) {
-		this.estacionamientos = cantEstacionamientos;
+		this.cantEstacionamientos = cantEstacionamientos;
 	}
 	/*agrega una bici a la estación*/
 	public void agregarBicicleta(Bicicleta unaBici){
@@ -99,7 +99,7 @@ public class Estacion {
 	}
 	
 	public int cantidadEstacionamientosLibres(){
-		return (estacionamientos - bicicletas.size());		
+		return (cantEstacionamientos - bicicletas.size());		
 	}
 	
 

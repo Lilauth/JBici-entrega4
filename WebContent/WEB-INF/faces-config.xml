@@ -21,6 +21,26 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
+		<managed-bean-name>estacionesBean</managed-bean-name>
+		<managed-bean-class>backingBeans.EstacionesBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>estacionBean</managed-bean-name>
+		<managed-bean-class>backingBeans.EstacionBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>bicicletasBean</managed-bean-name>
+		<managed-bean-class>backingBeans.BicicletasBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>bicibletaBean</managed-bean-name>
+		<managed-bean-class>backingBeans.BicicletaBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
 		<managed-bean-name>prestamoBean</managed-bean-name>
 		<managed-bean-class>backingBeans.PrestamoBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>

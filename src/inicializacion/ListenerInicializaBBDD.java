@@ -20,52 +20,47 @@ public class ListenerInicializaBBDD implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent arg0) {
     	
-    	// PERFILES ========================================   	
-    	/*
-    	 * Los perfiles van fijos y son 2: Administradores y Usuarios
-    	 */
-    	/*
-    	IBaseDAO<Perfil> daoPerfil = FactoryDAO.getPerfilDAO();
-    	Perfil perfil = new Perfil();
-    	perfil.setId(1);
-    	perfil.setDescripcion("ADMINISTRADOR");
-    	daoPerfil.persistir(perfil);
-    	
-    	perfil = new Perfil();
-    	perfil.setId(2);
-    	perfil.setDescripcion("USUARIO");
-    	daoPerfil.persistir(perfil);
-    	*/
-    	
     	// USUARIOS ========================================
     	/*
-    	 *  Creo un usuario Administrador por defecto (si no existe) admin@admin.com.ar 
-    	 *  y pass admin
-    	 *  necesario para poder usar el sistema
+    	 *  Creo un usuario Administrador por defecto (si no existe) admin@admin.com 
+    	 *  y pass admin necesario para poder usar el sistema
+    	 *  y otro usuario comun usuario@usuario.com y pass usuario
     	 */
     	
     	IBaseDAO<Usuario> daoUsuario = FactoryDAO.getUsuarioDAO();
     	Usuario user;
     	if (daoUsuario.listar().isEmpty()) {
-    		System.out.println("** Agregando usuario Admin ");
     		// no hay usuarios en la BD
+    		
     		user = new Usuario();    		
+    		user.setNombre("Usuario");
+    		user.setApellido("Admin");
     		user.setPerfil(Perfil.ADMINISTRADOR);
     		user.setActivo(true);
-    		user.setEmail("admin@admin.com.ar");
+    		user.setEmail("admin@admin.com");
     		user.setPassword("admin");    		
     		
     		daoUsuario.persistir(user);
+    		System.out.println("** Agregado usuario Admin ");
+    		
+    		user = new Usuario();    		
+    		user.setPerfil(Perfil.USUARIO);
+    		user.setActivo(true);
+    		user.setNombre("Usuario");
+    		user.setApellido("Comun");
+    		user.setEmail("usuario@usuario.com");
+    		user.setPassword("usuario");    		
+    		
+    		daoUsuario.persistir(user);
+    		System.out.println("** Agregado usuario comun ");
     	}
-    	else {
-    		System.out.println("Admin ya existe");
-    	}
+    	
     	
     	IBaseDAO<Estacion> daoEstacion = FactoryDAO.getEstacionDAO();
     	if (daoEstacion.listar().isEmpty()){
     		Estacion pzaSanMartin = new Estacion();
     		pzaSanMartin.setCantEstacionamientos(40);    		
-    		pzaSanMartin.setNombre("Plaza San MartÃ­n");
+    		pzaSanMartin.setNombre("Plaza San Martín");
     		pzaSanMartin.setUbicacion(-34.918131995447354, -57.948323906781006);
     		pzaSanMartin.setEstado(EstadoEstacion.OPERATIVA);
     		daoEstacion.persistir(pzaSanMartin);
