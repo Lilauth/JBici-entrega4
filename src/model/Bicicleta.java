@@ -3,7 +3,6 @@ package model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,7 +20,7 @@ public class Bicicleta {
 	
 	@ManyToOne(optional = true)
 	@JoinColumn(name="idEstacion")
-	private Estacion ubicacionActual;
+	private Estacion estacionActual;
 	
 	@OneToOne(optional = true)	
 	private PrestamoActual prestamoActual;
@@ -65,11 +64,11 @@ public class Bicicleta {
 	public void setPatente(String patente) {
 		this.patente = patente;
 	}
-	public Estacion getUbicacionActual() {
-		return ubicacionActual;
+	public Estacion getEstacionActual() {
+		return estacionActual;
 	}
-	public void setUbicacionActual(Estacion ubicacionActual) {
-		this.ubicacionActual = ubicacionActual;
+	public void setEstacionActual(Estacion ubicacionActual) {
+		this.estacionActual = ubicacionActual;
 	}
 	
 	/*comportamiento*/	
