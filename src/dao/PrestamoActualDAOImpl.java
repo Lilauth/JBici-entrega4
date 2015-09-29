@@ -3,11 +3,13 @@ package dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
 import model.PrestamoActual;
 import model.Usuario;
 
-public class PrestamoActualDAOImpl extends BaseDAOImpl<PrestamoActual> implements IPrestamoActual {		
+public class PrestamoActualDAOImpl extends BaseDAOImpl<PrestamoActual> implements IPrestamoActualDAO {		
 
 	public PrestamoActualDAOImpl(Class<PrestamoActual> unaClase,EntityManager unEntityManager) {
 		super(unaClase, unEntityManager);
@@ -15,10 +17,18 @@ public class PrestamoActualDAOImpl extends BaseDAOImpl<PrestamoActual> implement
 	}
 
 	@Override
-	public List<PrestamoActual> listar(Usuario usuario) {
-		//lista los prestamos actuales de un usuario dado
-			
-		return null;
+	public List<PrestamoActual> listar(Usuario usuario) {		
+		Query qry = this.em.createQuery("select p from PrestamoActual p where idUsuario = :id_usuario");		
+		qry.setParameter("id_usuario", usuario.getId());		
+		try{			
+			@SuppressWarnings("unchecked")
+			List<PrestamoActual> p = qry.getResultList();
+			return p;
+		}
+		catch (NoResultException nre){
+			//
+			return null;
+		}
 	}
 
 }

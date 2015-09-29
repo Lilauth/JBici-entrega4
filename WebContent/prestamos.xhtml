@@ -13,8 +13,9 @@
 	<ui:include src="userMenu.xhtml" />
 	</ui:define>
 	
-		<ui:define name="content">
-			<h3>Usuarios</h3>
+		<ui:define name="content">		
+			<h3>Prestamos Actales</h3>
+			<h:form id="form">
 			<h:dataTable value="#{prestamosBean.prestamosActualesList}" var="p">
 
 				<h:column>
@@ -40,18 +41,42 @@
     		<h:column>
     				<f:facet name="header">Operaciones</f:facet> 
     				<h:form>    					      																													
-							<h:commandButton value="Devolver" >
-							<f:param name="oper" value="D" />
+						<h:commandButton value="Devolver" action="#{ prestamoBean.devolver }">							
 							<f:param name="id" value="#{p.id}" />
-							</h:commandButton>																																			
-						</h:form>												
+						</h:commandButton>																																			
+					</h:form>												
+    		</h:column>
+    		<h:column>
+    				<f:facet name="header">Operaciones</f:facet> 
+    				<h:form>    					      																													
+						<h:commandButton value="Devolver" action="#{ prestamoBean.devolver }">
+							<f:ajax execute="@form" render="@form" />							
+							<f:param name="id" value="#{p.id}" />
+						</h:commandButton>																																			
+					</h:form>												
     		</h:column>
     		</h:dataTable>	
-    		<h:form>
+    		</h:form>
+    		<h:form>    		   
     		<h:commandButton value="Nuevo" action="#{ prestamoBean.nuevo }">    						
 				<f:param name="idUsuario" value="#{ loginBean.idUsuario}" />
     		</h:commandButton>
-    		</h:form>    			
+    		</h:form>  
+    		    		
+    		<b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass">
+    			<b:label text="#{ loginBean.idUsuario}"></b:label>
+   				 <p>Modal body</p>
+    			 <f:facet name="footer">    			 	
+       				 <b:button value="close" dismiss="modal" onclick="return false;"/>
+        			 <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;"/>
+   				 </f:facet>
+			</b:modal>
+			<b:row>
+   				<b:column span="3">
+        			<b:button value="Trigger (JavaScript)" look="success" onclick="$('.modalPseudoClass').modal();return false;" size="lg"/>
+    			</b:column>
+			</b:row>		
+			    			
 		</ui:define>
 	</ui:composition>
 	
