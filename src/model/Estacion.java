@@ -18,7 +18,7 @@ public class Estacion {
 	
 	private EstadoEstacion estado;
 	private int estacionamientos;
-	@OneToMany(mappedBy="ubicacionActual")
+	@OneToMany(mappedBy="estacionActual")
 	private List<Bicicleta> bicicletas;
 	private double latitud;
 	private double longitud;
