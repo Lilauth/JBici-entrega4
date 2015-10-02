@@ -71,6 +71,10 @@ public class Bicicleta {
 		this.estacionActual = ubicacionActual;
 	}
 	
+	public String toString(){
+		return this.patente;
+	}
+	
 	/*comportamiento*/	
 	public void devolver(){
 		//PrestamoHistorico archivar = new PrestamoHistorico();

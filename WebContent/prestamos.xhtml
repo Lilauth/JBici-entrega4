@@ -63,9 +63,15 @@
     		</h:commandButton>
     		</h:form>  
     		    		
-    		<b:modal id="amodal" title="Modal Example" styleClass="modalPseudoClass">
-    			<b:label text="#{ loginBean.idUsuario}"></b:label>
-   				 <p>Modal body</p>
+    		<b:modal id="amodal" title="Devolucion del Prestamo" styleClass="modalPseudoClass">    			 					   				
+   				  <div class="modal-body">
+   				 <h:outputText value="estacion:" for="est" />	
+   				 <b:selectOneMenu value="#{prestamoBean.estacionOrigen}" span="12">
+							<f:selectItems value="#{prestamoBean.estaciones}" />
+				 </b:selectOneMenu>
+				 <h:outputText value="prestamo:" />
+				 </div>
+				
     			 <f:facet name="footer">    			 	
        				 <b:button value="close" dismiss="modal" onclick="return false;"/>
         			 <b:button value="Ok" look="primary" dismiss="modal" onclick="return false;"/>

@@ -12,12 +12,18 @@ import javax.persistence.OneToOne;
 @DiscriminatorValue("H")
 public class PrestamoHistorico extends Prestamo {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private Date fechaHoraDevolucion;
 	@ManyToOne
 	@JoinColumn(name = "idEstacionDevolucion")
 	private Estacion estacionDevolucion;
 	
 	public PrestamoHistorico(){}
+	
 	@OneToOne(optional = true, mappedBy="prestamoOrigen")
 	private Denuncia denuncia;
 
