@@ -36,7 +36,7 @@
 						
 				
 				<b:messages id="nachrichten" showDetail="true" showSummary="false" />
-				<h:outputText value="Nombre:"/>
+				<h:outputLabel value="Nombre:"/>
 				<b:inputText span="12" placeholder="nombre" id="nombre" value="#{ usuarioBean.usuario.nombre }" required="true" requiredMessage="Nombre: se necesita un valor ">  </b:inputText>
 
 				<h:outputLabel value="Apellido:" for="apellido" />
@@ -47,24 +47,24 @@
 				<h:outputLabel value="DNI:" for="dni"/>
 				<b:inputText span="12" placeholder="DNI" id="dni" value="#{ usuarioBean.usuario.dni }" > </b:inputText>	
 				
-				<h:outputText value="Domicilio:"/>
+				<h:outputLabel value="Domicilio:"/>
 				<b:inputText span="12" placeholder="domicilio" value="#{ usuarioBean.usuario.domicilio }" > </b:inputText>
 				
-				<h:outputText value="Sexo:"/>
+				<h:outputLabel value="Sexo:"/>
 				<b:inputText span="12" placeholder="Sexo" value="#{ usuarioBean.usuario.sexo }" > </b:inputText>
 				
-				<h:outputText value="fecha de nacimiento:"/>
+				<h:outputLabel value="fecha de nacimiento:"/>
 				<b:datepicker span="12" mode="popup-icon" value="#{ usuarioBean.usuario.fechaNacimiento }"></b:datepicker>	
 							
-				<h:outputText value="e-mail:"/>
+				<h:outputLabel value="e-mail:"/>
 				<b:inputText span="12" placeholder="e-mail" id="e-mail" value="#{ usuarioBean.usuario.email }" required="true"  requiredMessage="E-mail: se necesita un valor"> </b:inputText>
 
 
-				<h:outputText value="password:" rendered="#{ (usuarioBean.esAlta) or (loginBean.idUsuario eq usuarioBean.usuario.id) }" />
+				<h:outputLabel value="password:" rendered="#{ (usuarioBean.esAlta) or (loginBean.idUsuario eq usuarioBean.usuario.id) }" />
 				<b:inputSecret span="12" value="#{ usuarioBean.usuario.password }" rendered="#{ (usuarioBean.esAlta) or (loginBean.idUsuario eq usuarioBean.usuario.id) }"  required="true"  requiredMessage="Password: se necesita un valor" />				          				        
 				
 
-				<h:outputText value="perfil:" for="per" rendered="#{ loginBean.esAdmin }" />					
+				<h:outputLabel value="perfil:" for="per" rendered="#{ loginBean.esAdmin }" />					
 					<b:selectOneMenu value="#{usuarioBean.usuario.perfil}" span="12" id="per" rendered="#{ loginBean.esAdmin }" >
        				<f:selectItems value="#{usuarioBean.perfilesDisponibles}"/>
    				</b:selectOneMenu>

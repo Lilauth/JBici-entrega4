@@ -21,24 +21,62 @@
 		<ui:define name="content">
 		<b:container>
 		<b:well>
-		<h:form id="newUserForm" styleClass="form-horizontal">			
+		<h:form id="estacionForm" styleClass="form-horizontal">			
 				<h:message for="newUserForm" /> 
 						
 				<!-- <h:panelGrid columns="2" cellpadding="5"> -->
 						
 				
 				<b:messages id="nachrichten" showDetail="true" showSummary="false" />
-				<h:outputText value="Nombre:"/>
+				<h:outputLabel value="Nombre:"/>
 				<b:inputText span="12" placeholder="nombre" id="nombre" value="#{ estacionBean.estacion.nombre }" required="true" requiredMessage="Nombre: se necesita un valor ">  </b:inputText>
 
 				<h:outputLabel value="Cant. Estacionamientos:" for="apellido" />
 				<b:inputText span="12" placeholder="apellido" id="apellido" value="#{ estacionBean.estacion.cantEstacionamientos }" required="true"  requiredMessage="Cant. Estacionamientos: se necesita un valor"> </b:inputText>	
 				<h:message for="apellido" />
 
-				<h:outputText value="Estado:" for="per" />					
-					<b:selectOneMenu value="#{estacionBean.estacion.estado}" span="12" id="per" >
+				<h:outputLabel value="Estado:" for="estado" />					
+				<b:selectOneMenu value="#{estacionBean.estacion.estado}" span="12" id="estado" >
        				<f:selectItems value="#{estacionBean.estadosDisponibles}"/>
    				</b:selectOneMenu>
+   				
+   				<h:inputHidden id="latitud" value="#{ estacionBean.estacion.latitud }" ></h:inputHidden>
+   				<h:inputHidden id="longitud" value="#{ estacionBean.estacion.longitud }" ></h:inputHidden>
+   				
+   				<h:outputLabel value="Ubicacion:" />
+   				<div id="map-container" style="height: 300px" ></div>
+   				<script src="http://maps.google.com/maps/api/js"></script>
+   				 <script>	
+   				 
+   				function actualizarPosicion(event) {
+			      	document.getElementById("estacionForm:latitud").value = event.latLng.lat().toString();
+			      	document.getElementById("estacionForm:longitud").value = event.latLng.lng().toString();
+			      }
+ 
+				      function init_map() {
+				    	  
+				 		var mapoptions = {
+				 			/*centrado en la estacion*/	
+				          	center: new google.maps.LatLng("#{ estacionBean.estacion.latitud }","#{ estacionBean.estacion.longitud }"),
+				          	zoom: 13         
+				        	};
+				 		
+				        var map = new google.maps.Map(document.getElementById("map-container"), mapoptions); 	 	
+					 	
+						/*estacion en el mapa*/
+						var estacion=new google.maps.Marker({
+					  			position:new google.maps.LatLng("#{ estacionBean.estacion.latitud }", "#{ estacionBean.estacion.longitud }"),
+					  			draggable:true
+					  		});		
+						estacion.setMap(map);	
+						
+						google.maps.event.addListener(estacion, "dragend", actualizarPosicion);
+				      }  				      	      
+				      				      			 		
+				      
+				      google.maps.event.addDomListener(window, "load", init_map);
+				 
+				    </script>
 				<b:row>	   
 				                      			          
 				<b:commandButton value="Aceptar" action="#{ estacionBean.guardar }" icon="chevron-right" iconAlign="right" look="success"></b:commandButton>
@@ -52,7 +90,14 @@
 		</b:container>
 		</ui:define>
 
+
+
 	</ui:composition>
+
+
+   
+   
+
 
 </h:body>
 

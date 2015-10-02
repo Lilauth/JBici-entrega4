@@ -14,37 +14,44 @@
 	</ui:define>
 	
 		<ui:define name="content">
-			<h3>Estaciones</h3>
+			<h3>Bicicletas</h3>
 			
 			<h:form>
-				<b:commandButton value="Nueva Estacion" action="#{ estacionBean.nuevaEstacion }"
+				<b:commandButton value="Nueva Estacion" action="#{ bicicletaBean.nuevaBicicleta }"
 							 icon="chevron-right" iconAlign="right">
 				</b:commandButton>
 			</h:form>
 			
 			<b:container fluid="true"> <b:column> <b:row styleClass="table-responsive">
-				<h:dataTable styleClass="table table-striped"  value="#{estacionesBean.listaEstaciones}" var="e">
+				<h:dataTable styleClass="table table-striped"  value="#{bicicletasBean.listaBicicletas}" var="b">
 
 					<h:column>
-						<f:facet name="header">Nombre</f:facet>
-    					#{e.nombre}
-    				</h:column>
+						<f:facet name="header">Patente</f:facet>
+		    			#{b.patente}
+	 	    		</h:column>
 
 					<h:column>
 						<f:facet name="header">Estado</f:facet>
-		    			#{e.estado}
+		    			#{b.estadoActual}
 	 	    		</h:column>
 	 	    		
-	    			<h:column>
-						<f:facet name="header">Cant. Estacionamientos</f:facet>
-		    			#{e.cantEstacionamientos}
+	    			
+	 	    		
+	 	    		<h:column>
+						<f:facet name="header">Estacion Actual</f:facet>
+		    			#{b.estacionActual}
+	 	    		</h:column>
+	 	    		
+	 	    		<h:column>
+						<f:facet name="header">Fecha de Ingreso</f:facet>
+		    			#{b.fechaIngreso}
 	 	    		</h:column>
 		    		
     				<h:column>
     					<f:facet name="header">Operaciones</f:facet> 
     					<h:form>    					      																													
-							<h:commandButton value="Editar" action="#{ estacionBean.editarEstacion }">
-							<f:param name="id" value="#{e.id}" />
+							<h:commandButton value="Editar" action="#{ bicicletaBean.editarBicicleta }">
+							<f:param name="id" value="#{b.id}" />
 							</h:commandButton>																																			
 						</h:form>												
     				</h:column>
@@ -52,8 +59,8 @@
     				<h:column>    				
     					<h:form>    			
     						<!-- // TODO Confirmacion antes de eliminar	-->		      				
-							<h:commandButton value="Eliminar" action="#{ estacionBean.eliminarEstacion }">							
-								<f:param name="id" value="#{e.id}" />
+							<h:commandButton value="Eliminar" action="#{ bicicletaBean.eliminarBicicleta }">							
+								<f:param name="id" value="#{b.id}" />
 							</h:commandButton>																									
 						</h:form>												
     				</h:column>
