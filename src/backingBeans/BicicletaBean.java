@@ -1,11 +1,14 @@
 package backingBeans;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import javax.faces.context.FacesContext;
 import dao.FactoryDAO;
 import dao.IBaseDAO;
 import model.Bicicleta;
+import model.Estacion;
 import model.EstadoBicicleta;;
 
 public class BicicletaBean  implements Serializable{
@@ -29,25 +32,30 @@ public class BicicletaBean  implements Serializable{
 	public EstadoBicicleta[] getEstadosDisponibles() {
 		return EstadoBicicleta.values();
 	}
+	
+	public List<Estacion> getEstacionesDisponibles() {
+		return FactoryDAO.getEstacionDAO().listar();
+	}
 
-	public Bicicleta getEstacion() {
+	public Bicicleta getBicicleta() {
 		return bicicleta;
 	}
-	public void setEstacion(Bicicleta bicicleta) {
+	public void setBicicleta(Bicicleta bicicleta) {
 		this.bicicleta = bicicleta;
 	}
 
-	public String nuevaEstacion() {
+	public String nuevaBicicleta() {
 		oper = Operacion.NUEVA_BICICLETA;
 		
 		bicicleta = new Bicicleta();
 		bicicleta.setEstadoActual(EstadoBicicleta.APTA_PARA_USO);
+		//bicicleta.setEstacionActual(FactoryDAO.getEstacionDAO().listar().get(0));
 		
 		
-		return "/estacion.xhtml?faces-redirect=true";
+		return "/bicicleta.xhtml?faces-redirect=true";
 	}
 	
-	public String editarEstacion() {
+	public String editarBicicleta() {
 		oper = Operacion.EDITAR_BICICLETA;
 		
 		// Recupero el idEstacion pasado x parametro
@@ -56,10 +64,10 @@ public class BicicletaBean  implements Serializable{
         
         bicicleta = FactoryDAO.getBicicletaDAO().buscaPorID(idBicicleta);
 		
-		return "/estacion.xhtml?faces-redirect=true";
+		return "/bicicleta.xhtml?faces-redirect=true";
 	}
 	
-	public String eliminarEstacion() {
+	public String eliminarBicicleta() {
 		oper = Operacion.ELIMINAR_BICICLETA;
 		
 		// Recupero el idEstacion pasado x parametro
@@ -72,16 +80,20 @@ public class BicicletaBean  implements Serializable{
         // borro la estacion
         daoEstacion.borrar(bicicleta);
 		
-		return "/estaciones.xhtml?faces-redirect=true";
+		return "/bicicletas.xhtml?faces-redirect=true";
 	}
 	
 	public String guardar(){
 		
 		try{		  
+			if (oper == Operacion.NUEVA_BICICLETA) {
+				bicicleta.setFechaIngreso(new Date());
+			}
+			
 			FactoryDAO.getBicicletaDAO().persistir(bicicleta);
 			
 
-			return "/estaciones.xhtml?faces-redirect=true"; 	  
+			return "/bicicletas.xhtml?faces-redirect=true"; 	  
 
 		}
 		catch(Exception e){
@@ -93,7 +105,7 @@ public class BicicletaBean  implements Serializable{
 	
 	public String getCancelarURL(){
 		
-		return "./estaciones.xhtml?faces-redirect=true"; 
+		return "./bicicletas.xhtml?faces-redirect=true"; 
 			
 	}
 

@@ -40,6 +40,10 @@ public class EstacionBean implements Serializable{
 		
 		estacion = new Estacion();
 		estacion.setEstado(EstadoEstacion.OPERATIVA);
+		// Posicion inicial para estaciones nuevas (Plaza Moreno)
+		estacion.setLatitud(-34.921417);
+		estacion.setLongitud(-57.954515);
+
 		
 		
 		return "/estacion.xhtml?faces-redirect=true";

@@ -36,7 +36,7 @@
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>bicibletaBean</managed-bean-name>
+		<managed-bean-name>bicicletaBean</managed-bean-name>
 		<managed-bean-class>backingBeans.BicicletaBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>

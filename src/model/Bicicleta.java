@@ -32,8 +32,19 @@ public class Bicicleta {
 	private EstadoBicicleta estadoActual;
 	
 	/*getters and setters*/
+	
+	
 	public List<HistorialBicicleta> getHistorial() {
 		return historial;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public void setHistorial(List<HistorialBicicleta> historial) {
+		this.historial = historial;
 	}
 	public void agregarHistorial(HistorialBicicleta historial) {
 		this.historial.add(historial);
@@ -73,7 +84,7 @@ public class Bicicleta {
 	
 	public String toString(){
 		return this.patente;
-	}
+	}	
 	
 	/*comportamiento*/	
 	public void devolver(){

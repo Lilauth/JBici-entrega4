@@ -8,8 +8,8 @@
 	<ui:define name="header">
 	<ui:include src="adminMenu.xhtml" />
 		<h3>
-		       <h:outputText value="Nueva Estacion" rendered="#{ estacionBean.esAlta }" />
-		       <h:outputText value="Modifica Estacion" rendered="#{ not estacionBean.esAlta}"/>		    
+		       <h:outputText value="Nueva Bicicleta" rendered="#{ bicicletaBean.esAlta }" />
+		       <h:outputText value="Modifica Bicicleta" rendered="#{ not bicicletaBean.esAlta}"/>		    
 		</h3>
 	</ui:define>
 	
@@ -25,22 +25,24 @@
 						
 				
 				<b:messages id="nachrichten" showDetail="true" showSummary="false" />
-				<h:outputText value="Nombre:"/>
-				<b:inputText span="12" placeholder="nombre" id="nombre" value="#{ estacionBean.estacion.nombre }" required="true" requiredMessage="Nombre: se necesita un valor ">  </b:inputText>
+				<h:outputLabel value="Patente:"/>
+				<b:inputText span="12" placeholder="patente" id="patente" value="#{ bicicletaBean.bicicleta.patente }" required="true" requiredMessage="Patente: se necesita un valor ">  </b:inputText>
 
-				<h:outputLabel value="Cant. Estacionamientos:" for="apellido" />
-				<b:inputText span="12" placeholder="apellido" id="apellido" value="#{ estacionBean.estacion.cantEstacionamientos }" required="true"  requiredMessage="Cant. Estacionamientos: se necesita un valor"> </b:inputText>	
-				<h:message for="apellido" />
-
-				<h:outputText value="Estado:" for="per" />					
-					<b:selectOneMenu value="#{estacionBean.estacion.estado}" span="12" id="per" >
-       				<f:selectItems value="#{estacionBean.estadosDisponibles}"/>
+				<h:outputLabel value="Estado:" for="estado" />					
+					<b:selectOneMenu value="#{bicicletaBean.bicicleta.estadoActual}" span="12" id="estado" >
+       				<f:selectItems value="#{bicicletaBean.estadosDisponibles}"/>
    				</b:selectOneMenu>
+   				
+   				<h:outputLabel value="Estacion Actual:" for="estacion" />					
+					<b:selectOneMenu value="#{bicicletaBean.bicicleta.estacionActual}" span="12" id="estacion" >
+       				<f:selectItems value="#{bicicletaBean.estacionesDisponibles}"/>
+   				</b:selectOneMenu>
+   				
 				<b:row>	   
 				                      			          
-				<b:commandButton value="Aceptar" action="#{ estacionBean.guardar }" icon="chevron-right" iconAlign="right" look="success"></b:commandButton>
+				<b:commandButton value="Aceptar" action="#{ bicicletaBean.guardar }" icon="chevron-right" iconAlign="right" look="success"></b:commandButton>
 				
-				<h:link value="Cancelar" outcome="#{ estacionBean.cancelarURL }" styleClass="btn btn-default" ></h:link>
+				<h:link value="Cancelar" outcome="#{ bicicletaBean.cancelarURL }" styleClass="btn btn-default" ></h:link>
 				
 				</b:row>							
 		<!--  	</h:panelGrid>-->			

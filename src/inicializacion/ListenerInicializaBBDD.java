@@ -1,11 +1,15 @@
 package inicializacion;
 
+import java.util.Date;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import dao.*;
+import model.Bicicleta;
 import model.Estacion;
+import model.EstadoBicicleta;
 import model.EstadoEstacion;
 import model.Perfil;
 import model.Usuario;
@@ -55,7 +59,7 @@ public class ListenerInicializaBBDD implements ServletContextListener {
     		System.out.println("** Agregado usuario comun ");
     	}
     	
-    	
+    	// ESTACIONES y BICICLETAS
     	IBaseDAO<Estacion> daoEstacion = FactoryDAO.getEstacionDAO();
     	if (daoEstacion.listar().isEmpty()){
     		Estacion pzaSanMartin = new Estacion();
@@ -71,6 +75,25 @@ public class ListenerInicializaBBDD implements ServletContextListener {
     		pzaIslasMalvinas.setUbicacion(-34.9274944, -57.9611928);
     		pzaIslasMalvinas.setEstado(EstadoEstacion.OPERATIVA);
     		daoEstacion.persistir(pzaIslasMalvinas);
+    		
+    		// Si no hay estaciones, no hay bicicletas
+    		IBaseDAO<Bicicleta> daoBicicleta = FactoryDAO.getBicicletaDAO();
+    		
+    		Bicicleta bici = new Bicicleta();
+    		bici.setEstadoActual(EstadoBicicleta.APTA_PARA_USO);
+    		bici.setEstacionActual(pzaSanMartin);
+    		bici.setPatente("MLL033");
+    		bici.setFechaIngreso(new Date());
+    		
+    		daoBicicleta.persistir(bici);
+    		
+    		bici = new Bicicleta();
+    		bici.setEstadoActual(EstadoBicicleta.APTA_PARA_USO);
+    		bici.setEstacionActual(pzaSanMartin);
+    		bici.setPatente("LTA701");
+    		bici.setFechaIngreso(new Date());
+    		
+    		daoBicicleta.persistir(bici);
     		
     	}
     	
