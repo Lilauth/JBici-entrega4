@@ -11,15 +11,12 @@ public class PrestamoActual extends Prestamo implements Serializable{
 	
 	/**
 	 * 
-	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	public PrestamoActual(){}
 	
 	public void devolver(){		
-		//
-		//
 		//
 	}
 	

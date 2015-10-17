@@ -49,16 +49,13 @@
         	<h:outputText value="Your Name:"></h:outputText> 
        		<h:inputText id="inputname" label="${msgs.prompt}" value="#{prestamoBean.idSelectedStation}" />
         	<br />
-        	<h:commandButton action="#{prestamoBean.sayHello}" value="Display my name here, now!">        	    
-            	<f:ajax render="myName myCars myMessage" 
+        	<h:commandButton action="#{prestamoBean.sayHello}" value="Recargar Bicicletas Disponibles">        	    
+            	<f:ajax render="myCars myMessage" 
             	        execute="inputname" 
             	        listener="#{prestamoBean.editMyCarsList}" />
         	</h:commandButton>
-       		<br />
-        	<br />
-        	<h:outputText id="myName" value="#{prestamoBean.idSelectedStation}" />
-        	<br />
-        	<br />
+       		<br />                	
+        	
         	<h:outputText value="Choose your bike:"></h:outputText>  
         	<h:selectOneMenu id="myCars" 
         	                 binding="#{prestamoBean.htmlSelectCars}" 

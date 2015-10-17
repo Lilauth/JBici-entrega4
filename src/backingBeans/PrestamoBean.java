@@ -84,8 +84,7 @@ public class PrestamoBean implements Serializable{
             cars = (FactoryDAO.getEstacionDAO().buscaPorID(idSelectedStation)).getBicicletasDisponibles();         
             return cars;
     }
-    
-    
+        
     public void setName(String aName){
     	this.name= aName;
     }
@@ -103,8 +102,7 @@ public class PrestamoBean implements Serializable{
     }
     
     //funciones agregadas para probar AJAX
-    
-    
+       
 	public Bicicleta getBicicleta() {
 		return bicicleta;
 	}
@@ -123,8 +121,7 @@ public class PrestamoBean implements Serializable{
     	this.cars = new ArrayList<Bicicleta>();
     	
     }
-       
-    
+           
     public Usuario getUsuario() {
 		return usuario;
 	}
@@ -167,7 +164,7 @@ public class PrestamoBean implements Serializable{
 	public String guardar(){
 		try{		  		    
 		    //genero el prestamo para el usuario
-			for(int i=0;i<=this.cantidad;i++){
+			for(int i=0;i<this.cantidad;i++){
 				PrestamoActual pa = new PrestamoActual();
 			    pa.setUsuario(this.getUsuario());
 			    pa.setEstacion(this.getEstacionOrigen());
@@ -188,11 +185,11 @@ public class PrestamoBean implements Serializable{
 	public String devolver(){
 		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         long idPrestamoActual = Long.parseLong(params.get("id"));
-        PrestamoActual pa = FactoryDAO.getPrestamoActualDAO().buscaPorID(idPrestamoActual);
-        pa.devolver();     
+        PrestamoActual pa = FactoryDAO.getPrestamoActualDAO().buscaPorID(idPrestamoActual);        
+        pa.devolver();                
 		//abre la ventana para que elija la estación donde devuelve
         //y tira un memo por si quiere denunciar algo
 		return "/prestamos.xhtml?faces-redirect=true";	
 	}
-
+    
 }
