@@ -35,12 +35,10 @@
 
 			</b:dropMenu>
 			<h:form styleClass="navbar-form navbar-right">
-				<h:commandButton value="#{ loginBean.username }"
-								 action="#{ usuarioBean.modificarDatos }">
-								 <!-- // TODO recuperar usuario de la sesion en el bean  -->
-					<f:param name="id" value="#{ loginBean.idUsuario }" />
-					<f:param name="oper" value="M" />
-				</h:commandButton>
+				<b:commandButton value="#{ loginBean.username }"
+								 look="success"
+								 action="#{ usuarioBean.modificarDatos }">					
+				</b:commandButton>
 			
 				<h:commandLink value="Cerrar Sesion" action="#{ loginBean.logout }" />
 			</h:form>

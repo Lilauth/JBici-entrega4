@@ -2,8 +2,12 @@ package backingBeans;
 
 import java.io.Serializable;
 import java.util.Map;
+
+import javax.el.ELContext;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+
 import dao.FactoryDAO;
 import dao.IUsuarioDAO;
 import model.Perfil;
@@ -20,10 +24,26 @@ public class UsuarioBean implements Serializable{
 	private Perfil[] perfilesDisponibles;
 	private Usuario usuario;
 	private Operacion oper;
+	@ManagedProperty(value="#{loginBean}")
+	private LoginBean loginBean;	
 	
-	public UsuarioBean() {		
+	public UsuarioBean() {
+		//recupero el login bean de la sesion activa
+		ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+		LoginBean neededBean = (LoginBean) FacesContext.getCurrentInstance()
+				.getApplication().getELResolver()
+				.getValue(elContext, null, "loginBean");
+		this.setLoginBean(neededBean);
 		perfilesDisponibles = Perfil.values();
 
+	}
+	
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
 	}
 	
 	public Perfil[] getPerfilesDisponibles(){		
@@ -95,8 +115,8 @@ public class UsuarioBean implements Serializable{
 		oper = Operacion.MODIFICAR_DATOS; 
 		
 		// Recupero el idUsuario pasado x parametro 
-		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        long idUsuario = Long.parseLong(params.get("id"));   
+		//Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        long idUsuario = this.loginBean.getIdUsuario();  //Long.parseLong(params.get("id"));   
         
         // cargar usuario por id 
    	    usuario = FactoryDAO.getUsuarioDAO().buscaPorID(idUsuario);

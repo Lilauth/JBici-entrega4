@@ -9,12 +9,11 @@
 		fixed="top">    
    			<b:navbarLinks>
 				<b:navLink value="Prestamos" outcome="prestamos.xhtml"></b:navLink>
-				<h:form styleClass="navbar-form navbar-right">
-				<h:commandButton value="#{ loginBean.username }"
-								 action="#{ usuarioBean.editar }">
-					<f:param name="id" value="#{ loginBean.idUsuario }" />
-					<f:param name="oper" value="M" />
-				</h:commandButton>
+			<h:form styleClass="navbar-form navbar-right">
+				<b:commandButton value="#{ loginBean.username }"
+								 look="success"
+								 action="#{ usuarioBean.modificarDatos }">					
+				</b:commandButton>
 			
 				<h:commandLink value="Cerrar Sesion" action="#{ loginBean.logout }" />
 			</h:form>

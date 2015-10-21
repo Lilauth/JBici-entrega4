@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:b="http://bootsfaces.net/ui">
+	xmlns:p="http://primefaces.org/ui">
+	
 <h:body>
 	
 	<ui:composition template="templates/defaultLayout.xhtml">
@@ -15,6 +16,11 @@
 	
 		<ui:define name="content">		
 			<h3>Prestamos Actales</h3>
+			
+			<h:form>																	
+				<p:commandButton value="Nuevo" action="#{prestamoBean.nuevo}" />						
+			</h:form>
+			
 			<h:form id="form">
 			<h:dataTable value="#{prestamosBean.prestamosActualesList}" var="p">
 

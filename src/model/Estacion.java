@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +9,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import dao.FactoryDAO;
+
 
 @Entity
-public class Estacion {
+public class Estacion implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
 	private long id;	
 	private String nombre;
@@ -24,7 +31,8 @@ public class Estacion {
 	private double longitud;
 	
 	//constructor vacío hibernate
-	public Estacion(){}
+	public Estacion(){		
+	}
 	
 	public void setId(long id){
 		this.id = id;
@@ -32,9 +40,7 @@ public class Estacion {
 	
 	public long getId(){
 		return this.id;
-	}
-	
-	
+	}	
 	
     public double getLatitud() {
 		return latitud;
@@ -52,13 +58,22 @@ public class Estacion {
 		this.longitud = longitud;
 	}
 
-	public List<Bicicleta> getBiciccletas() {
+	public List<Bicicleta> getBicicletas() {
+		if(bicicletas == null){
+			bicicletas = new ArrayList<Bicicleta>();
+		}
+		List<Bicicleta> todas = FactoryDAO.getBicicletaDAO().listar();
+		for(Bicicleta b: todas){
+			if(b.getEstacionActual() == this){
+				bicicletas.add(b);
+			}
+		}		
 		return bicicletas;
 	}
 	
-    /**private void setBicicletas(List<Bicicleta> bicisDisponibles) {
+    public void setBicicletas(List<Bicicleta> bicisDisponibles) {
 		this.bicicletas = bicisDisponibles;
-	}*/
+	}
 	
 	public String getNombre() {
 		return nombre;

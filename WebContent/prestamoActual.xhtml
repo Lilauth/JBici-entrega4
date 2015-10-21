@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:b="http://bootsfaces.net/ui">
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui">
 <h:body>
 
 	<ui:composition template="templates/defaultLayout.xhtml">
@@ -29,45 +30,44 @@
 						</b:selectOneMenu>
 						
 						<h:outputText value="bicicletas:" for="bic" />
-						<b:selectOneMenu value="" span="12">
-							<f:selectItems value="" />
-						</b:selectOneMenu>
+						<b:selectOneMenu value="#{prestamoBean.bicicleta}" span="12">
+							<f:selectItems value="#{prestamoBean.bicicletas}" />
+						</b:selectOneMenu>															
 						
-						<h:outputText value="Cantidad:" />
-						<b:inputText span="12" placeholder="cantidad"
-							value="#{ prestamoBean.cantidad }">
-						</b:inputText>
 						<b:row>
 							<h:commandButton value="Aceptar"
 								action="#{ prestamoBean.guardar }"></h:commandButton>
 							<a href="bienvenido.xhtml">Inicio</a>
-						</b:row>																		
-					</h:form>
-		 <h:form>
-        	<h:messages id="myMessage" globalOnly="true" showDetail="true" />
-        	
-        	<h:outputText value="Your Name:"></h:outputText> 
-       		<h:inputText id="inputname" label="${msgs.prompt}" value="#{prestamoBean.idSelectedStation}" />
-        	<br />
-        	<h:commandButton action="#{prestamoBean.sayHello}" value="Recargar Bicicletas Disponibles">        	    
-            	<f:ajax render="myCars myMessage" 
-            	        execute="inputname" 
-            	        listener="#{prestamoBean.editMyCarsList}" />
-        	</h:commandButton>
-       		<br />                	
-        	
-        	<h:outputText value="Choose your bike:"></h:outputText>  
-        	<h:selectOneMenu id="myCars" 
-        	                 binding="#{prestamoBean.htmlSelectCars}" 
-        	                 value="#{prestamoBean.selectedCar}" />
-        	
-        	<br />
-        	<br />
-    	  </h:form>
+						</b:row>
+						
+	<h:form>
+    	<p:growl id="msgs" showDetail="true" />
+ 
+   
+        	<h:panelGrid columns="2" cellpadding="5">
+            	<p:outputLabel for="country" value="Country: " />
+            	<p:selectOneMenu id="country" value="#{prestamoBean.country}" style="width:150px">
+                	<p:ajax listener="#{prestamoBean.onCountryChange}" update="city" />
+                	<f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />                	
+                	<f:selectItems value="#{prestamoBean.countries}" />
+            	</p:selectOneMenu>
+ 
+            	<p:outputLabel for="city" value="City: " />
+            		<p:selectOneMenu id="city" value="#{prestamoBean.city}" style="width:150px">
+                		<f:selectItem itemLabel="Select City" itemValue="" noSelectionOption="true" />
+                		<f:selectItems value="#{prestamoBean.cities}" />
+            		</p:selectOneMenu>
+        		</h:panelGrid>
+ 
+ 
+        				<p:commandButton value="Aceptar" update="msgs" actionListener="#{prestamoBean.displayLocation}" icon="ui-icon-check" />    
+					</h:form>	
+				</h:form>																	
+
+					
 				</b:well>
 			</b:container>
 		</ui:define>
-
 
 	</ui:composition>
 
