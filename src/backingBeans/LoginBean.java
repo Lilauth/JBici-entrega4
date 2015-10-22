@@ -1,5 +1,7 @@
 package backingBeans;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -7,8 +9,12 @@ import model.Perfil;
 import model.Usuario;
 import dao.FactoryDAO;
 
-public class LoginBean {
+public class LoginBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
 	private long idUsuario;

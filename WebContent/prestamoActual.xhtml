@@ -21,50 +21,28 @@
 		<ui:define name="content">
 			<b:container>
 				<b:well>
-					<h:form id="prestarBici" styleClass="form-horizontal">
-						<h:message for="prestarBici" />
-
-						<h:outputText value="estacion:" for="est" />
-						<b:selectOneMenu value="#{prestamoBean.estacionOrigen}" span="12">
-							<f:selectItems value="#{prestamoBean.estaciones}" />
-						</b:selectOneMenu>
+					<h:form id="prestarBici" styleClass="form-horizontal">					
 						
-						<h:outputText value="bicicletas:" for="bic" />
-						<b:selectOneMenu value="#{prestamoBean.bicicleta}" span="12">
-							<f:selectItems value="#{prestamoBean.bicicletas}" />
-						</b:selectOneMenu>															
+						<p:growl id="msgs" showDetail="true" globalOnly="false" autoUpdate="true" />
 						
+						<h:panelGrid columns="2" cellpadding="5">
+												
+							<p:outputLabel for="station" value="Station: " />
+            				<p:selectOneMenu id="station" value="#{prestamoBean.estacionOrigen}" style="width:180px">
+                				<p:ajax listener="#{prestamoBean.onChangeEstacion}" update="bicicle"/>                			                	
+                				<f:selectItems value="#{prestamoBean.estaciones}" />
+            				</p:selectOneMenu>  
+            			
+            				<p:outputLabel for="bicicle" value="Bike: " style="width:180px"/>
+            				<p:selectOneMenu id="bicicle" value="#{prestamoBean.bicicleta}">                			                			                
+                				<f:selectItems value="#{prestamoBean.bicicletas}" />
+            				</p:selectOneMenu>            		            			
+						</h:panelGrid>																							
 						<b:row>
-							<h:commandButton value="Aceptar"
-								action="#{ prestamoBean.guardar }"></h:commandButton>
+							<p:commandButton value="Aceptar" update="msgs" actionListener="#{prestamoBean.displayLocation}" icon="ui-icon-check" action="#{prestamoBean.guardar}"/>
 							<a href="bienvenido.xhtml">Inicio</a>
 						</b:row>
-						
-	<h:form>
-    	<p:growl id="msgs" showDetail="true" />
- 
-   
-        	<h:panelGrid columns="2" cellpadding="5">
-            	<p:outputLabel for="country" value="Country: " />
-            	<p:selectOneMenu id="country" value="#{prestamoBean.country}" style="width:150px">
-                	<p:ajax listener="#{prestamoBean.onCountryChange}" update="city" />
-                	<f:selectItem itemLabel="Select Country" itemValue="" noSelectionOption="true" />                	
-                	<f:selectItems value="#{prestamoBean.countries}" />
-            	</p:selectOneMenu>
- 
-            	<p:outputLabel for="city" value="City: " />
-            		<p:selectOneMenu id="city" value="#{prestamoBean.city}" style="width:150px">
-                		<f:selectItem itemLabel="Select City" itemValue="" noSelectionOption="true" />
-                		<f:selectItems value="#{prestamoBean.cities}" />
-            		</p:selectOneMenu>
-        		</h:panelGrid>
- 
- 
-        				<p:commandButton value="Aceptar" update="msgs" actionListener="#{prestamoBean.displayLocation}" icon="ui-icon-check" />    
-					</h:form>	
-				</h:form>																	
-
-					
+					</h:form>																						
 				</b:well>
 			</b:container>
 		</ui:define>

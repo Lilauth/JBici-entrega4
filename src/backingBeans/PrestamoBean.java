@@ -2,7 +2,6 @@ package backingBeans;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,62 +28,21 @@ public class PrestamoBean implements Serializable{
     private Usuario usuario; 
     @ManagedProperty(value="#{loginBean}")
 	private LoginBean loginBean;
-    
-/**
- * muchas pruebas ajax*/
-    private Map<String,Map<String,String>> data = new HashMap<String, Map<String,String>>();
-    private String country; 
-    private String city;  
-    private Map<String,String> countries;
-    private Map<String,String> cities;
  
-    public Map<String, Map<String, String>> getData() {
-        return data;
-    }
- 
-    public String getCountry() {
-        return country;
-    }
- 
-    public void setCountry(String country) {
-        this.country = country;
-    }
- 
-    public String getCity() {
-        return city;
-    }
- 
-    public void setCity(String city) {
-        this.city = city;
-    }
- 
-    public Map<String, String> getCountries() {
-        return countries;
-    }
- 
-    public Map<String, String> getCities() {
-        return cities;
-    }
- 
-    public void onCountryChange() {    	
-    	System.out.println("ejecuta onchange");
-    	 if(country !=null && !country.equals(""))
-             cities = data.get(country);
-         else
-             cities = new HashMap<String, String>();
-    }
-     
     public void displayLocation() {
+    	
     	FacesMessage msg;
-        if(city != null && country != null){
+        if(estacionOrigen != null && bicicleta != null){ 
         	
-            msg = new FacesMessage("Selected", city + " of " + country);
+            msg = new FacesMessage("Alta de Préstamo");
            
         }
         else
+        	
             msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "City is not selected."); 
              
         FacesContext.getCurrentInstance().addMessage(null, msg);
+        
     }
     
     public List<Bicicleta> getBicicletas(){  
@@ -120,32 +78,7 @@ public class PrestamoBean implements Serializable{
 		LoginBean neededBean = (LoginBean) FacesContext.getCurrentInstance()
 				.getApplication().getELResolver()
 				.getValue(elContext, null, "loginBean");
-		this.setLoginBean(neededBean); 
-		this.bicicletas = FactoryDAO.getBicicletaDAO().listar();
-		
-		/*pruebas ajax*/
-		countries  = new HashMap<String, String>();
-        countries.put("USA", "USA");
-        countries.put("Germany", "Germany");
-        countries.put("Brazil", "Brazil");
-         
-        Map<String,String> map = new HashMap<String, String>();
-        map.put("New York", "New York");
-        map.put("San Francisco", "San Francisco");
-        map.put("Denver", "Denver");
-        data.put("USA", map);
-         
-        map = new HashMap<String, String>();
-        map.put("Berlin", "Berlin");
-        map.put("Munich", "Munich");
-        map.put("Frankfurt", "Frankfurt");
-        data.put("Germany", map);
-         
-        map = new HashMap<String, String>();
-        map.put("Sao Paolo", "Sao Paolo");
-        map.put("Rio de Janerio", "Rio de Janerio");
-        map.put("Salvador", "Salvador");
-        data.put("Brazil", map);
+		this.setLoginBean(neededBean); 				
     }
 	
            
@@ -170,6 +103,12 @@ public class PrestamoBean implements Serializable{
 		this.estacionOrigen = estacionOrigen;
 	}
 	
+	public void onChangeEstacion(){
+		if(estacionOrigen != null){			
+		  bicicletas = estacionOrigen.getBicicletas();
+		}
+	}
+	
 	public String nuevo(){		      
         //Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         //long idUsuario = Long.parseLong(params.get("idUsuario"));
@@ -186,6 +125,7 @@ public class PrestamoBean implements Serializable{
 			    pa.setUsuario(this.getUsuario());
 			    pa.setEstacion(this.getEstacionOrigen());
 			    pa.setFechaHora(new Date());
+			    pa.setBicicleta(bicicleta);
 			    FactoryDAO.getPrestamoActualDAO().persistir(pa);
 			//}		    		    		
 		    return "/prestamos.xhtml?faces-redirect=true";					
