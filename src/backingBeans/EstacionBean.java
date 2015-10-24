@@ -2,7 +2,9 @@ package backingBeans;
 
 import java.io.Serializable;
 import java.util.Map;
+
 import javax.faces.context.FacesContext;
+
 import dao.FactoryDAO;
 import dao.IBaseDAO;
 import model.Estacion;
@@ -18,7 +20,7 @@ public class EstacionBean implements Serializable{
 	public EstacionBean(){
 		
 	}
-	
+
 	public boolean getEsAlta() {
 		return (oper == Operacion.NUEVA_ESTACION);
 	}
@@ -42,9 +44,7 @@ public class EstacionBean implements Serializable{
 		estacion.setEstado(EstadoEstacion.OPERATIVA);
 		// Posicion inicial para estaciones nuevas (Plaza Moreno)
 		estacion.setLatitud(-34.921417);
-		estacion.setLongitud(-57.954515);
-
-		
+		estacion.setLongitud(-57.954515);		
 		
 		return "/estacion.xhtml?faces-redirect=true";
 	}

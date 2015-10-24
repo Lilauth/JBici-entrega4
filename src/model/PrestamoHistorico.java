@@ -57,6 +57,6 @@ public class PrestamoHistorico extends Prestamo {
 		this.setEstacion(p.getEstacion());
 		this.setFechaHora(p.getFechaHora());
 		this.setUsuario(p.getUsuario());		
-	}
+	}	
 
 }

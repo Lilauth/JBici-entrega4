@@ -5,7 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui">
 	
 <h:body>
 	
@@ -14,61 +15,54 @@
 	<ui:include src="userMenu.xhtml" />
 	</ui:define>
 	
-		<ui:define name="content">		
-			<h3>Prestamos Actales</h3>
-			
-			<h:form>																	
-				<p:commandButton value="Nuevo" action="#{prestamoBean.nuevo}" />						
-			</h:form>
-			
-			<h:form id="form">
-			<h:dataTable value="#{prestamosBean.prestamosActualesList}" var="p">
+	<ui:define name="content">		
+		<h3>Prestamos Actuales</h3>
+		
+		<h:form>
+			<b:commandButton value="Nuevo Préstamo" action="#{prestamoBean.nuevo}"
+							 icon="chevron-right" iconAlign="right">
+			</b:commandButton>
+		</h:form>				
+		
+		<b:container fluid="true"> <b:column> <b:row styleClass="table-responsive">
+			<h:dataTable styleClass="table table-striped" value="#{prestamosBean.prestamosActualesList}" var="p">
 
 				<h:column>
-
-					<f:facet name="header">id</f:facet>
-    			#{p.id}
- 
-    		</h:column>
+					<f:facet name="header">id</f:facet>#{p.id}
+    			</h:column>
 
 				<h:column>
-
-					<f:facet name="header">Fecha</f:facet>
-    			#{u.fechaHora}
- 
-    		</h:column>
+					<f:facet name="header">Fecha</f:facet>#{p.fechaHora}
+    			</h:column>
 
 				<h:column>
-
-					<f:facet name="header">estacion origen</f:facet>
-    			#{p.estacion.nombre}
- 
-    		</h:column>
-    		<h:column>
+					<f:facet name="header">Estacion Origen</f:facet>#{p.estacion.nombre}
+ 				</h:column>
+ 				<h:column>
+					<f:facet name="header">Patente Bicicleta</f:facet>#{p.bicicleta.patente}
+ 				</h:column>
+    			<h:column>
     				<f:facet name="header">Operaciones</f:facet> 
     				<h:form>    					      																													
-						<h:commandButton value="Devolver" action="#{ prestamoBean.devolver }">							
+						<p:commandButton value="Devolver" action="#{ prestamoBean.devolver }">							
 							<f:param name="id" value="#{p.id}" />
-						</h:commandButton>																																			
+							<f:param name="denuncia" value="0" />
+						</p:commandButton>																																			
 					</h:form>												
-    		</h:column>
-    		<h:column>
+    			</h:column>
+    			<h:column>
     				<f:facet name="header">Operaciones</f:facet> 
     				<h:form>    					      																													
-						<h:commandButton value="Devolver y Denunciar" action="#{ prestamoBean.devolver }">
+						<p:commandButton value="Devolver y Denunciar" action="#{ prestamoBean.devolver }">
 							<f:ajax execute="@form" render="@form" />							
 							<f:param name="id" value="#{p.id}" />
-						</h:commandButton>																																			
+							<f:param name="denuncia" value="1" />
+						</p:commandButton>																																					
 					</h:form>												
-    		</h:column>
-    		</h:dataTable>	
-    		</h:form>
-    		<h:form>    		   
-    		<h:commandButton value="Nuevo" action="#{ prestamoBean.nuevo }">    						
-				<f:param name="idUsuario" value="#{ loginBean.idUsuario}" />
-    		</h:commandButton>
-    		</h:form>      		    		    		
-			    			
+    			</h:column>
+    		</h:dataTable>
+    	</b:row> </b:column> </b:container> 	
+    		 		 		    					    			
 		</ui:define>
 	</ui:composition>
 	

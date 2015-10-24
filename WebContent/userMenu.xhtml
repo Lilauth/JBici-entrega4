@@ -5,19 +5,22 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:b="http://bootsfaces.net/ui">
     
-    <b:navBar brand="JBici" brandHref="bienvenido.xhtml" inverse="true"
-		fixed="top">    
-   			<b:navbarLinks>
-				<b:navLink value="Prestamos" outcome="prestamos.xhtml"></b:navLink>
-			<h:form styleClass="navbar-form navbar-right">
-				<b:commandButton value="#{ loginBean.username }"
+    <b:navBar brand="JBici" brandHref="bienvenido.xhtml" inverse="true" fixed="top">    
+   		<b:navbarLinks>
+   			<b:dropMenu value="Datos Generales">
+   				<b:navLink header="Préstamos"></b:navLink>   			
+				<b:navLink value="Nuevo Préstamo" outcome="prestamoActual.xhtml"></b:navLink>
+				<b:navLink value="Devolver Préstamo" outcome="prestamos.xhtml"></b:navLink>
+				<b:navLink header="Estaciones"></b:navLink>
+				<b:navLink value="Listado de Estaciones" outcome="estaciones.xhtml"></b:navLink>
+			</b:dropMenu>
+				<h:form styleClass="navbar-form navbar-right">
+					<b:commandButton value="#{ loginBean.username }"
 								 look="success"
 								 action="#{ usuarioBean.modificarDatos }">					
-				</b:commandButton>
-			
+					</b:commandButton>
 				<h:commandLink value="Cerrar Sesion" action="#{ loginBean.logout }" />
 			</h:form>
-				
-			</b:navbarLinks>
+		</b:navbarLinks>
 	</b:navBar>		   								
 </ui:composition>

@@ -18,7 +18,7 @@
 			
 			<h:form>
 				<b:commandButton value="Nueva Estacion" action="#{ estacionBean.nuevaEstacion }"
-							 icon="chevron-right" iconAlign="right">
+							     icon="chevron-right" iconAlign="right" rendered="#{loginBean.esAdmin}">
 				</b:commandButton>
 			</h:form>
 			
@@ -40,7 +40,7 @@
 		    			#{e.cantEstacionamientos}
 	 	    		</h:column>
 		    		
-    				<h:column>
+    				<h:column rendered="#{loginBean.esAdmin}">
     					<f:facet name="header">Operaciones</f:facet> 
     					<h:form>    					      																													
 							<h:commandButton value="Editar" action="#{ estacionBean.editarEstacion }">
@@ -49,7 +49,7 @@
 						</h:form>												
     				</h:column>
     				
-    				<h:column>    				
+    				<h:column rendered="#{loginBean.esAdmin}">    				
     					<h:form>    			
     						<!-- // TODO Confirmacion antes de eliminar	-->		      				
 							<h:commandButton value="Eliminar" action="#{ estacionBean.eliminarEstacion }">							

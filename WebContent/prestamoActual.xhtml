@@ -27,20 +27,21 @@
 						
 						<h:panelGrid columns="2" cellpadding="5">
 												
-							<p:outputLabel for="station" value="Station: " />
+							<p:outputLabel for="station" value="Estación: " />
             				<p:selectOneMenu id="station" value="#{prestamoBean.estacionOrigen}" style="width:180px">
                 				<p:ajax listener="#{prestamoBean.onChangeEstacion}" update="bicicle"/>                			                	
                 				<f:selectItems value="#{prestamoBean.estaciones}" />
             				</p:selectOneMenu>  
             			
-            				<p:outputLabel for="bicicle" value="Bike: " style="width:180px"/>
-            				<p:selectOneMenu id="bicicle" value="#{prestamoBean.bicicleta}">                			                			                
+            				<p:outputLabel for="bicicle" value="Bicicleta: " style="width:180px"/>
+            				<p:selectOneMenu id="bicicle" value="#{prestamoBean.bicicleta}" required="true">                			                			                
                 				<f:selectItems value="#{prestamoBean.bicicletas}" />
             				</p:selectOneMenu>            		            			
-						</h:panelGrid>																							
+						</h:panelGrid>
+																									
 						<b:row>
-							<p:commandButton value="Aceptar" update="msgs" actionListener="#{prestamoBean.displayLocation}" icon="ui-icon-check" action="#{prestamoBean.guardar}"/>
-							<a href="bienvenido.xhtml">Inicio</a>
+							<b:commandButton value="Aceptar" look="success" update="msgs" actionListener="#{prestamoBean.displayLocation}" icon="ok" action="#{prestamoBean.guardar}"/>
+							<b:button value="Cancelar" look="danger" icon="remove" outcome="prestamos.xhtml"></b:button>							
 						</b:row>
 					</h:form>																						
 				</b:well>

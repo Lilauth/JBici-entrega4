@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+	<ui:composition template="templates/defaultLayout.xhtml">
+
+		<ui:define name="header">
+			<ui:include src="userMenu.xhtml" />
+
+			<h3>
+				<h:outputText value="Devolver Bicicleta " />
+				<h:outputText value="#{prestamoBean.prestamoActual.bicicleta.patente}" />
+			</h3>
+		</ui:define>
+		<ui:define name="content">
+			<b:container>
+				<b:well>
+					<h:form id="devolverBici" styleClass="form-horizontal">					
+						
+						<p:growl id="msgs" showDetail="true" globalOnly="false" autoUpdate="true" />
+						
+						<h:panelGrid columns="2" cellpadding="5">														
+																			
+							<p:outputLabel for="station" value="Estación: " />
+            				<p:selectOneMenu id="station" value="#{prestamoBean.estacionDestino}" style="width:180px">                				                			                	
+                				<f:selectItems value="#{prestamoBean.estaciones}" />
+            				</p:selectOneMenu>              				
+            			            				           		            			
+						</h:panelGrid>	
+						
+						<h:inputTextarea value="#{prestamoBean.denunciaPrestamo.descripcion}" rendered="#{prestamoBean.denuncia}" ></h:inputTextarea>
+																												
+						<b:row>
+						    <b:commandButton value="Aceptar" look="success" update="msgs" icon="ok" action="#{prestamoBean.aceptarDevolucion}"/>							
+							<b:button value="Cancelar" look="danger" icon="remove" outcome="prestamos.xhtml"></b:button>
+						</b:row>
+						
+					</h:form>																						
+				</b:well>
+			</b:container>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>

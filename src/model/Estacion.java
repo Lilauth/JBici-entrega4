@@ -9,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import dao.FactoryDAO;
-
 
 @Entity
 public class Estacion implements Serializable{
@@ -58,16 +56,7 @@ public class Estacion implements Serializable{
 		this.longitud = longitud;
 	}
 
-	public List<Bicicleta> getBicicletas() {
-		if(bicicletas == null){
-			bicicletas = new ArrayList<Bicicleta>();
-		}
-		List<Bicicleta> todas = FactoryDAO.getBicicletaDAO().listar();
-		for(Bicicleta b: todas){
-			if(b.getEstacionActual() == this){
-				bicicletas.add(b);
-			}
-		}		
+	public List<Bicicleta> getBicicletas() {				
 		return bicicletas;
 	}
 	
