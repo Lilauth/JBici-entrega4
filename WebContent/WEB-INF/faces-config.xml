@@ -50,6 +50,11 @@
 		<managed-bean-class>backingBeans.PrestamosBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>lineChartBean</managed-bean-name>
+		<managed-bean-class>backingBeans.LineChartBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	
 	<navigation-rule>
       <from-view-id>/login.xhtml</from-view-id>

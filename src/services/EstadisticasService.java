@@ -36,4 +36,6 @@ public class EstadisticasService {
 	public long bajasDeUsuarios(){
 		return this.auditDAO.bajasGenerales("class model.Usuario");
 	}
+	
+	
 }

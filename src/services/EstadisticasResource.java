@@ -14,10 +14,6 @@ import javax.ws.rs.core.MediaType;
 @Path("/estadisticas")
 public class EstadisticasResource {
 	EstadisticasService estService;
-	/**@Context
-	UriInfo uriInfo;
-	@Context
-	Request request;	*/
 	
 	public EstadisticasResource(){
 		this.estService = new EstadisticasService();
