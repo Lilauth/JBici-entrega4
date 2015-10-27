@@ -10,7 +10,12 @@
 	
 	<ui:composition template="templates/defaultLayout.xhtml">
 	<ui:define name="header">
-	<ui:include src="adminMenu.xhtml" />
+		<h:panelGroup rendered="#{ (loginBean.idUsuario ne -1) and (loginBean.esAdmin) }">
+    		<ui:include src="adminMenu.xhtml"/>
+ 		</h:panelGroup>	   
+ 		<h:panelGroup rendered="#{ (loginBean.idUsuario ne -1) and not(loginBean.esAdmin) }">
+    		<ui:include src="userMenu.xhtml"/>
+ 		</h:panelGroup>
 	</ui:define>
 	
 		<ui:define name="content">
