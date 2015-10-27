@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+<h:body>
+	
+	<ui:composition template="templates/defaultLayout.xhtml">
+		<ui:define name="header">
+			<ui:include src="adminMenu.xhtml" />
+		</ui:define>
+		
+		<ui:define name="content">							
+				<script src="http://code.jquery.com/jquery-1.4.2.min.js" type="text/javascript"></script>
+				<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+				<script type="text/javascript">
+		//<![CDATA[
+					google.load("visualization", "1", {packages:["corechart"]});
+		google.setOnLoadCallback(drawChart);
+		
+		function drawChart() {
+			
+			var url = "../rest/estadisticas/generales"; // Completar con URL del servicio REST
+			//var url = "http://localhost:8080/JBici-entrega4/rest/estadisticas/generales";
+			$.getJSON(url, function(data){			
+			var googleData = new google.visualization.DataTable();
+			googleData.addColumn('string', 'Operacion');
+			googleData.addColumn('number', 'Cantidad');
+			var total = data.length;			
+			for (i = 0; i < total; i++)
+			{
+				googleData.addRow([data[i].op, data[i].cantidad]); 
+			
+			}
+
+			var chart = new google.visualization.PieChart(document.getElementById('footer'));
+			chart.draw(googleData, {width: 450, height: 300, title: 'Operaciones sobre Entidad X', is3D: true});
+		});
+	}
+		//]]>
+	</script>
+
+	
+	
+		</ui:define>							
+	</ui:composition>
+</h:body>
+
+</html>
