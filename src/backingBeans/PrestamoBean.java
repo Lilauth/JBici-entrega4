@@ -134,12 +134,12 @@ public class PrestamoBean implements Serializable{
     	FacesMessage msg;
         if(estacionOrigen != null && bicicleta != null){ 
         	
-            msg = new FacesMessage("Alta de Préstamo");
+            msg = new FacesMessage("Alta de Prestamo");
            
         }
         else
         	
-            msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "City is not selected."); 
+            msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid", "Debe seleccionar una Bicicleta."); 
              
         FacesContext.getCurrentInstance().addMessage(null, msg);
         

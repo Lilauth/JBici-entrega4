@@ -22,27 +22,66 @@
 		<ui:define name="content">
 			<b:container>
 				<b:well>
-					<h:form id="devolverBici" styleClass="form-horizontal">					
+					<script src="http://maps.google.com/maps/api/js"></script>
+					<h:form id="devolverBici" styleClass="form-horizontal">		
+						<div id="map-container" style="height: 300px" ></div>			
 						
 						<p:growl id="msgs" showDetail="true" globalOnly="false" autoUpdate="true" />
 						
 						<h:panelGrid columns="2" cellpadding="5">														
 																			
-							<p:outputLabel for="station" value="Estación: " />
-            				<p:selectOneMenu id="station" value="#{prestamoBean.estacionDestino}" style="width:180px">                				                			                	
+							<p:outputLabel for="station" value="Estación: " style="display:block" />
+            				<p:selectOneMenu id="station" widgetVar="w_menu" value="#{prestamoBean.estacionDestino}" style="display:block;width:500px">                				                			                	
                 				<f:selectItems value="#{prestamoBean.estaciones}" />
             				</p:selectOneMenu>              				
             			            				           		            			
 						</h:panelGrid>	
 						
-						<h:inputTextarea value="#{prestamoBean.denunciaPrestamo.descripcion}" rendered="#{prestamoBean.denuncia}" ></h:inputTextarea>
+						<p:outputLabel for="obs" value="Observaciones: " rendered="#{prestamoBean.denuncia}"   style="display:block" />
+						<p:inputTextarea id="obs" value="#{prestamoBean.denunciaPrestamo.descripcion}" rendered="#{prestamoBean.denuncia}" style="display:block;width:500px"  ></p:inputTextarea>
 																												
 						<b:row>
 						    <b:commandButton value="Aceptar" look="success" update="msgs" icon="ok" action="#{prestamoBean.aceptarDevolucion}"/>							
 							<b:button value="Cancelar" look="danger" icon="remove" outcome="prestamos.xhtml"></b:button>
 						</b:row>
 						
-					</h:form>																						
+					</h:form>	
+					
+					<script>	
+
+		   				 function actualizarEstacion(idEstacion) {
+					      	w_menu.selectValue(idEstacion);
+					      }
+		 
+					      function init_map() {
+					    	  
+					 		var mapoptions = {
+					 			/*centrado en plaza moreno */
+					          	center: new google.maps.LatLng(-34.921417,-57.954515),
+					          	zoom: 13         
+					        	};
+					 		
+					        var map = new google.maps.Map(document.getElementById("map-container"), mapoptions); 	 	
+						 	
+							/*estaciones en el mapa*/
+							<ui:repeat value="#{prestamoBean.estaciones}" var="estacion">
+								var estacion=new google.maps.Marker({
+							  			position:new google.maps.LatLng("#{ estacion.latitud }", "#{ estacion.longitud }"),
+							  			title: '"#{ estacion.nombre }"'
+							  		});		
+								estacion.setMap(map);	
+								estacion.addListener('click', function() {
+										actualizarEstacion("#{ estacion.id }");
+									  });
+							</ui:repeat>
+							
+							
+					      }  				      	      
+					      				      			 		
+					      
+					      google.maps.event.addDomListener(window, "load", init_map);
+				 
+				    </script>																						
 				</b:well>
 			</b:container>
 		</ui:define>

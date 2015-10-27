@@ -7,12 +7,13 @@
     
     <b:navBar brand="JBici" brandHref="bienvenido.xhtml" inverse="true" fixed="top">    
    		<b:navbarLinks>
-   			<b:dropMenu value="Datos Generales">
-   				<b:navLink header="Préstamos"></b:navLink>   			
+   			<b:dropMenu value="Préstamos"> 			
 				<b:navLink value="Nuevo Préstamo" outcome="prestamoActual.xhtml"></b:navLink>
 				<b:navLink value="Devolver Préstamo" outcome="prestamos.xhtml"></b:navLink>
-				<b:navLink header="Estaciones"></b:navLink>
+			</b:dropMenu>	
+			<b:dropMenu value="Estaciones">
 				<b:navLink value="Listado de Estaciones" outcome="estaciones.xhtml"></b:navLink>
+					
 			</b:dropMenu>
 				<h:form styleClass="navbar-form navbar-right">
 					<b:commandButton value="#{ loginBean.username }"
